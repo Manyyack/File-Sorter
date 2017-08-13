@@ -23,7 +23,12 @@ namespace File_Sorter
 			}
 			catch (ArgumentException)
 			{
-				MessageBox.Show("Enter the Valid Path");
+				MessageBox.Show("Enter the Valid Path.");
+				return;
+			}
+			catch(DirectoryNotFoundException)
+			{
+				MessageBox.Show("No directory found!");
 				return;
 			}
 
