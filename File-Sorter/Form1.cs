@@ -32,7 +32,13 @@ namespace File_Sorter
 				return;
 			}
 
-			IEnumerable<string> fileEntries = Directory.EnumerateFiles(Directory.GetCurrentDirectory());
+			string[] fileEntries = Directory.GetFiles(Directory.GetCurrentDirectory());
+			
+			if(fileEntries.Length == 0)
+			{
+				MessageBox.Show("No Files present");
+				return;
+			} 
 
 			foreach (string fileName in fileEntries)
 			{
@@ -45,10 +51,13 @@ namespace File_Sorter
 				}
 				Directory.Move(fileName, fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));
 			}
+			MessageBox.Show("File Sort operation completed!");
+			Organize.Enabled = false;
 		}
 		private void F_Path_TextChanged(object sender, EventArgs e)
 		{
 			D_Path = F_Path.Text;
+			Organize.Enabled = true;
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
@@ -69,7 +78,10 @@ namespace File_Sorter
 		{
 			FolderBrowser.ShowDialog();
 			D_Path = FolderBrowser.SelectedPath;
-			Console.WriteLine(D_Path);
+			if(D_Path.Length != 0)
+			{
+				Organize.Enabled = true;
+			}
 			F_Path.Text = D_Path;
 			FolderBrowser.Dispose();
 		}
