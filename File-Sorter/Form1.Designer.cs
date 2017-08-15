@@ -38,7 +38,8 @@
 			// 
 			// Organize
 			// 
-			this.Organize.Location = new System.Drawing.Point(532, 11);
+			this.Organize.Enabled = false;
+			this.Organize.Location = new System.Drawing.Point(529, 11);
 			this.Organize.Name = "Organize";
 			this.Organize.Size = new System.Drawing.Size(122, 21);
 			this.Organize.TabIndex = 0;
@@ -53,13 +54,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.F_Path.AutoWordSelection = true;
-			this.F_Path.BackColor = System.Drawing.SystemColors.Info;
+			this.F_Path.BackColor = System.Drawing.Color.White;
 			this.F_Path.DetectUrls = false;
 			this.F_Path.EnableAutoDragDrop = true;
-			this.F_Path.Location = new System.Drawing.Point(47, 12);
+			this.F_Path.Location = new System.Drawing.Point(44, 12);
 			this.F_Path.Multiline = false;
 			this.F_Path.Name = "F_Path";
-			this.F_Path.Size = new System.Drawing.Size(447, 20);
+			this.F_Path.Size = new System.Drawing.Size(447, 21);
 			this.F_Path.TabIndex = 1;
 			this.F_Path.Text = "";
 			this.F_Path.TextChanged += new System.EventHandler(this.F_Path_TextChanged);
@@ -67,7 +68,8 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(12, 12);
+			this.label1.Cursor = System.Windows.Forms.Cursors.PanEast;
+			this.label1.Location = new System.Drawing.Point(9, 12);
 			this.label1.MaximumSize = new System.Drawing.Size(40, 80);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(29, 13);
@@ -76,12 +78,13 @@
 			// 
 			// Browse
 			// 
-			this.Browse.Location = new System.Drawing.Point(500, 10);
+			this.Browse.BackColor = System.Drawing.Color.Transparent;
+			this.Browse.Location = new System.Drawing.Point(497, 10);
 			this.Browse.Name = "Browse";
 			this.Browse.Size = new System.Drawing.Size(26, 23);
 			this.Browse.TabIndex = 3;
 			this.Browse.Text = "...";
-			this.Browse.UseVisualStyleBackColor = true;
+			this.Browse.UseVisualStyleBackColor = false;
 			this.Browse.Click += new System.EventHandler(this.Browse_Click);
 			// 
 			// FolderBrowser
@@ -96,7 +99,7 @@
 			this.AutoSize = true;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(666, 53);
+			this.ClientSize = new System.Drawing.Size(666, 42);
 			this.Controls.Add(this.Browse);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.F_Path);
