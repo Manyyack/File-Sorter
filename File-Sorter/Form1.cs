@@ -38,18 +38,42 @@ namespace File_Sorter
 			{
 				MessageBox.Show("No Files present");
 				return;
-			} 
+			}
 
+			string[] exclude_List = Exclude_List.Text.Split(';');
+			
 			foreach (string fileName in fileEntries)
 			{
+				bool do_Not_Move_F = false;
+
+				if(fileName.Contains("(1)")==true)
+				{
+					//to run the code to delete the file
+				}
+
 				var f_Pos = fileName.LastIndexOf('.');
 				string f_Type = fileName.Substring(f_Pos + 1).ToUpper();
 
-				if (Directory.Exists(D_Path + "\\" + f_Type) == false)
+				if (Exclude.Checked == true)
 				{
-					Directory.CreateDirectory(D_Path + "\\" + f_Type);
+					foreach(string list in exclude_List)
+					{
+					    if(list.ToUpper() == f_Type)
+						{
+							do_Not_Move_F = true;
+							break;
+						}
+					}
 				}
-				Directory.Move(fileName, fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));
+
+				if (do_Not_Move_F != true)
+				{
+					if (Directory.Exists(D_Path + "\\" + f_Type) == false)
+					{
+						Directory.CreateDirectory(D_Path + "\\" + f_Type);
+					}
+					Directory.Move(fileName, fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));
+				}
 			}
 			MessageBox.Show("File Sort operation completed!");
 			Organize.Enabled = false;
@@ -72,6 +96,8 @@ namespace File_Sorter
 			tooltip1.SetToolTip(this.F_Path, "Enter the path of the directory which needs sorting of the files");
 			tooltip1.SetToolTip(this.Organize, "Click to sort files");
 			tooltip1.SetToolTip(this.Browse, "Browse the folder");
+			tooltip1.SetToolTip(this.Exclude, "Tick to exclude types of file");
+			tooltip1.SetToolTip(this.Exclude_List, "Enter the file types to exclude seperated with ';'");
 		}
 
 		private void Browse_Click(object sender, EventArgs e)
