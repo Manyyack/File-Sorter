@@ -46,19 +46,21 @@ namespace File_Sorter
 			{
 				bool do_Not_Move_F = false;
 
-				if(fileName.Contains("(1)")==true)
-				{
-					//to run the code to delete the file
-				}
+				//if(fileName.Contains("(1)")==true)
+				//{
+				//	//to run the code to delete the file
+				//	Console.WriteLine("Deleting " + fileName);
+				//	File.Delete(fileName);
+				//}
 
 				var f_Pos = fileName.LastIndexOf('.');
 				string f_Type = fileName.Substring(f_Pos + 1).ToUpper();
 
 				if (Exclude.Checked == true)
 				{
-					foreach(string list in exclude_List)
+					foreach (string list in exclude_List)
 					{
-					    if(list.ToUpper() == f_Type)
+						if (list.ToUpper() == f_Type)
 						{
 							do_Not_Move_F = true;
 							break;
@@ -76,6 +78,7 @@ namespace File_Sorter
 				}
 			}
 			MessageBox.Show("File Sort operation completed!");
+			F_Path.Clear();
 			Organize.Enabled = false;
 		}
 		private void F_Path_TextChanged(object sender, EventArgs e)
@@ -96,7 +99,7 @@ namespace File_Sorter
 			tooltip1.SetToolTip(this.F_Path, "Enter the path of the directory which needs sorting of the files");
 			tooltip1.SetToolTip(this.Organize, "Click to sort files");
 			tooltip1.SetToolTip(this.Browse, "Browse the folder");
-			tooltip1.SetToolTip(this.Exclude, "Tick to exclude types of file");
+			tooltip1.SetToolTip(this.Exclude, "Check to exclude File Types");
 			tooltip1.SetToolTip(this.Exclude_List, "Enter the file types to exclude seperated with ';'");
 		}
 
