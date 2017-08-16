@@ -34,6 +34,8 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.Browse = new System.Windows.Forms.Button();
 			this.FolderBrowser = new System.Windows.Forms.FolderBrowserDialog();
+			this.Exclude = new System.Windows.Forms.CheckBox();
+			this.Exclude_List = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// Organize
@@ -91,6 +93,23 @@
 			// 
 			this.FolderBrowser.ShowNewFolderButton = false;
 			// 
+			// Exclude
+			// 
+			this.Exclude.AutoSize = true;
+			this.Exclude.Location = new System.Drawing.Point(44, 40);
+			this.Exclude.Name = "Exclude";
+			this.Exclude.Size = new System.Drawing.Size(64, 17);
+			this.Exclude.TabIndex = 4;
+			this.Exclude.Text = "Exclude";
+			this.Exclude.UseVisualStyleBackColor = true;
+			// 
+			// Exclude_List
+			// 
+			this.Exclude_List.Location = new System.Drawing.Point(115, 40);
+			this.Exclude_List.Name = "Exclude_List";
+			this.Exclude_List.Size = new System.Drawing.Size(209, 20);
+			this.Exclude_List.TabIndex = 5;
+			// 
 			// Form1
 			// 
 			this.AcceptButton = this.Organize;
@@ -99,7 +118,9 @@
 			this.AutoSize = true;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(666, 42);
+			this.ClientSize = new System.Drawing.Size(666, 115);
+			this.Controls.Add(this.Exclude_List);
+			this.Controls.Add(this.Exclude);
 			this.Controls.Add(this.Browse);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.F_Path);
@@ -124,6 +145,8 @@
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button Browse;
 		private System.Windows.Forms.FolderBrowserDialog FolderBrowser;
+		private System.Windows.Forms.CheckBox Exclude;
+		private System.Windows.Forms.TextBox Exclude_List;
 	}
 }
 
