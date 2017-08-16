@@ -114,7 +114,7 @@
 			// Monitor
 			// 
 			this.Monitor.AutoSize = true;
-			this.Monitor.Location = new System.Drawing.Point(430, 39);
+			this.Monitor.Location = new System.Drawing.Point(376, 40);
 			this.Monitor.Name = "Monitor";
 			this.Monitor.Size = new System.Drawing.Size(61, 17);
 			this.Monitor.TabIndex = 6;
