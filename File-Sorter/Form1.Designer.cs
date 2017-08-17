@@ -38,6 +38,7 @@
 			this.Exclude_List = new System.Windows.Forms.TextBox();
 			this.Monitor = new System.Windows.Forms.CheckBox();
 			this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+			this.Button_Box = new System.Windows.Forms.GroupBox();
 			((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -66,7 +67,7 @@
 			this.F_Path.Location = new System.Drawing.Point(44, 12);
 			this.F_Path.Multiline = false;
 			this.F_Path.Name = "F_Path";
-			this.F_Path.Size = new System.Drawing.Size(447, 20);
+			this.F_Path.Size = new System.Drawing.Size(447, 22);
 			this.F_Path.TabIndex = 1;
 			this.F_Path.Text = "";
 			this.F_Path.TextChanged += new System.EventHandler(this.F_Path_TextChanged);
@@ -135,13 +136,24 @@
 			this.fileSystemWatcher1.SynchronizingObject = this;
 			this.fileSystemWatcher1.Changed += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
 			// 
+			// Button_Box
+			// 
+			this.Button_Box.Location = new System.Drawing.Point(12, 66);
+			this.Button_Box.Name = "Button_Box";
+			this.Button_Box.Size = new System.Drawing.Size(639, 64);
+			this.Button_Box.TabIndex = 7;
+			this.Button_Box.TabStop = false;
+			this.Button_Box.Text = "Button_Box";
+			this.Button_Box.Visible = false;
+			// 
 			// Form1
 			// 
 			this.AcceptButton = this.Organize;
 			this.AllowDrop = true;
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.Silver;
-			this.ClientSize = new System.Drawing.Size(666, 112);
+			this.ClientSize = new System.Drawing.Size(666, 159);
+			this.Controls.Add(this.Button_Box);
 			this.Controls.Add(this.Monitor);
 			this.Controls.Add(this.Exclude_List);
 			this.Controls.Add(this.Exclude);
@@ -175,6 +187,7 @@
 		private System.Windows.Forms.TextBox Exclude_List;
 		private System.Windows.Forms.CheckBox Monitor;
 		private System.IO.FileSystemWatcher fileSystemWatcher1;
+		private System.Windows.Forms.GroupBox Button_Box;
 	}
 }
 

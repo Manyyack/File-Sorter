@@ -103,12 +103,32 @@ namespace File_Sorter
 					}
 
 					Directory.Move(fileName, fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));
-				}
+				}	
 			}
 			if (user_message == true)
 			{
 				MessageBox.Show("File Sort operation completed!");
 			}
+
+			Button[] folder_Open = new Button[File_Types.Count];
+
+			foreach (string thistypes in File_Types)
+			{
+				int indexer = File_Types.IndexOf(thistypes);
+				folder_Open[indexer] = new Button();
+
+				folder_Open[indexer].Width = Organize.Width;
+				folder_Open[indexer].Height = Organize.Height;
+				folder_Open[indexer].BackColor = Organize.BackColor;
+				folder_Open[indexer].ForeColor = Organize.ForeColor;
+				folder_Open[indexer].Text = "Open " + thistypes.ToUpper();
+
+				Button_Box.Controls.Add(folder_Open[indexer]);
+
+				Console.WriteLine("Files operated of " + thistypes + " are " + F_count[indexer].ToString());
+			}
+
+			Button_Box.Visible = true;
 		}
 
 		private void F_Path_TextChanged(object sender, EventArgs e)
