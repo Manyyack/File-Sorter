@@ -43,12 +43,14 @@
 			// 
 			// Organize
 			// 
+			this.Organize.BackColor = System.Drawing.SystemColors.Control;
+			this.Organize.ForeColor = System.Drawing.SystemColors.MenuText;
 			this.Organize.Location = new System.Drawing.Point(529, 11);
 			this.Organize.Name = "Organize";
-			this.Organize.Size = new System.Drawing.Size(122, 21);
+			this.Organize.Size = new System.Drawing.Size(122, 22);
 			this.Organize.TabIndex = 0;
 			this.Organize.Text = "Organize";
-			this.Organize.UseVisualStyleBackColor = true;
+			this.Organize.UseVisualStyleBackColor = false;
 			this.Organize.Click += new System.EventHandler(this.Connect_Click);
 			// 
 			// F_Path
@@ -64,7 +66,7 @@
 			this.F_Path.Location = new System.Drawing.Point(44, 12);
 			this.F_Path.Multiline = false;
 			this.F_Path.Name = "F_Path";
-			this.F_Path.Size = new System.Drawing.Size(447, 21);
+			this.F_Path.Size = new System.Drawing.Size(447, 20);
 			this.F_Path.TabIndex = 1;
 			this.F_Path.Text = "";
 			this.F_Path.TextChanged += new System.EventHandler(this.F_Path_TextChanged);
@@ -73,8 +75,8 @@
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Cursor = System.Windows.Forms.Cursors.PanEast;
-			this.label1.ForeColor = System.Drawing.SystemColors.Window;
-			this.label1.Location = new System.Drawing.Point(9, 12);
+			this.label1.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+			this.label1.Location = new System.Drawing.Point(9, 15);
 			this.label1.MaximumSize = new System.Drawing.Size(40, 80);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(29, 13);
@@ -84,6 +86,7 @@
 			// Browse
 			// 
 			this.Browse.BackColor = System.Drawing.Color.Transparent;
+			this.Browse.ForeColor = System.Drawing.SystemColors.InfoText;
 			this.Browse.Location = new System.Drawing.Point(497, 10);
 			this.Browse.Name = "Browse";
 			this.Browse.Size = new System.Drawing.Size(26, 23);
@@ -99,7 +102,7 @@
 			// Exclude
 			// 
 			this.Exclude.AutoSize = true;
-			this.Exclude.ForeColor = System.Drawing.SystemColors.Window;
+			this.Exclude.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
 			this.Exclude.Location = new System.Drawing.Point(44, 40);
 			this.Exclude.Name = "Exclude";
 			this.Exclude.Size = new System.Drawing.Size(64, 17);
@@ -109,7 +112,7 @@
 			// 
 			// Exclude_List
 			// 
-			this.Exclude_List.Location = new System.Drawing.Point(115, 40);
+			this.Exclude_List.Location = new System.Drawing.Point(104, 40);
 			this.Exclude_List.Name = "Exclude_List";
 			this.Exclude_List.Size = new System.Drawing.Size(209, 20);
 			this.Exclude_List.TabIndex = 5;
@@ -117,8 +120,8 @@
 			// Monitor
 			// 
 			this.Monitor.AutoSize = true;
-			this.Monitor.ForeColor = System.Drawing.SystemColors.Window;
-			this.Monitor.Location = new System.Drawing.Point(430, 39);
+			this.Monitor.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+			this.Monitor.Location = new System.Drawing.Point(430, 38);
 			this.Monitor.Name = "Monitor";
 			this.Monitor.Size = new System.Drawing.Size(61, 17);
 			this.Monitor.TabIndex = 6;
@@ -137,10 +140,8 @@
 			this.AcceptButton = this.Organize;
 			this.AllowDrop = true;
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.AutoSize = true;
-			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.BackColor = System.Drawing.Color.DimGray;
-			this.ClientSize = new System.Drawing.Size(666, 115);
+			this.BackColor = System.Drawing.Color.Silver;
+			this.ClientSize = new System.Drawing.Size(666, 112);
 			this.Controls.Add(this.Monitor);
 			this.Controls.Add(this.Exclude_List);
 			this.Controls.Add(this.Exclude);
@@ -149,7 +150,7 @@
 			this.Controls.Add(this.F_Path);
 			this.Controls.Add(this.Organize);
 			this.Cursor = System.Windows.Forms.Cursors.Default;
-			this.ForeColor = System.Drawing.SystemColors.Window;
+			this.ForeColor = System.Drawing.SystemColors.Menu;
 			this.HelpButton = true;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "Form1";
