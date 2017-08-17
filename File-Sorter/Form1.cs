@@ -101,6 +101,7 @@ namespace File_Sorter
 							F_count[indexer]++;
 						}
 					}
+
 					Directory.Move(fileName, fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));
 				}
 			}
