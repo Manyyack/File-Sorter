@@ -37,6 +37,8 @@
 			this.Exclude = new System.Windows.Forms.CheckBox();
 			this.Exclude_List = new System.Windows.Forms.TextBox();
 			this.Monitor = new System.Windows.Forms.CheckBox();
+			this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+			((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// Organize
@@ -121,6 +123,11 @@
 			this.Monitor.Text = "Monitor";
 			this.Monitor.UseVisualStyleBackColor = true;
 			// 
+			// fileSystemWatcher1
+			// 
+			this.fileSystemWatcher1.EnableRaisingEvents = true;
+			this.fileSystemWatcher1.SynchronizingObject = this;
+			// 
 			// Form1
 			// 
 			this.AcceptButton = this.Organize;
@@ -145,6 +152,7 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "File Sorter";
 			this.Load += new System.EventHandler(this.Form1_Load);
+			((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -160,6 +168,7 @@
 		private System.Windows.Forms.CheckBox Exclude;
 		private System.Windows.Forms.TextBox Exclude_List;
 		private System.Windows.Forms.CheckBox Monitor;
+		private System.IO.FileSystemWatcher fileSystemWatcher1;
 	}
 }
 

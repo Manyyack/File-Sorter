@@ -17,31 +17,41 @@ namespace File_Sorter
 
 		private void Connect_Click(object sender, EventArgs e)
 		{
+			changeDirectoryAndOrganize(F_Path.Text, true);
+			F_Path.Clear();
+			Organize.Enabled = false;
+		}
+
+		void changeDirectoryAndOrganize(string path_to_dir,bool user_message)
+		{
 			try
 			{
-				Directory.SetCurrentDirectory(F_Path.Text);
+				Directory.SetCurrentDirectory(path_to_dir);
 			}
 			catch (ArgumentException)
 			{
 				MessageBox.Show("Enter the Valid Path.");
 				return;
 			}
-			catch(DirectoryNotFoundException)
+			catch (DirectoryNotFoundException)
 			{
 				MessageBox.Show("No directory found!");
 				return;
 			}
 
 			string[] fileEntries = Directory.GetFiles(Directory.GetCurrentDirectory());
-			
-			if(fileEntries.Length == 0)
+
+			if (fileEntries.Length == 0)
 			{
-				MessageBox.Show("No Files present");
+				if (user_message == true)
+				{
+					MessageBox.Show("No Files present");
+				}
 				return;
 			}
 
 			string[] exclude_List = Exclude_List.Text.Split(';');
-			
+
 			foreach (string fileName in fileEntries)
 			{
 				bool do_Not_Move_F = false;
@@ -77,10 +87,12 @@ namespace File_Sorter
 					Directory.Move(fileName, fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));
 				}
 			}
-			MessageBox.Show("File Sort operation completed!");
-			F_Path.Clear();
-			Organize.Enabled = false;
+			if (user_message == true)
+			{
+				MessageBox.Show("File Sort operation completed!");
+			}
 		}
+
 		private void F_Path_TextChanged(object sender, EventArgs e)
 		{
 			D_Path = F_Path.Text;
@@ -114,8 +126,6 @@ namespace File_Sorter
 			F_Path.Text = D_Path;
 			FolderBrowser.Dispose();
 		}
-
-			
 	}
 }
 		
