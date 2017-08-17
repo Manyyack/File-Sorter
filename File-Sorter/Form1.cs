@@ -7,8 +7,7 @@ namespace File_Sorter
 {
 	public partial class Form1 : Form
 	{
-		String D_Path;
-		
+		String D_Path;		
 
 		public Form1()
 		{
@@ -17,12 +16,10 @@ namespace File_Sorter
 
 		private void Connect_Click(object sender, EventArgs e)
 		{
-			changeDirectoryAndOrganize(F_Path.Text, true);
-			F_Path.Clear();
-			Organize.Enabled = false;
+			changeDirectoryAndOrganize(F_Path.Text, true, true);
 		}
 
-		void changeDirectoryAndOrganize(string path_to_dir,bool user_message)
+		void changeDirectoryAndOrganize(string path_to_dir,bool user_message,bool give_Record)
 		{
 			try
 			{
@@ -51,6 +48,12 @@ namespace File_Sorter
 			}
 
 			string[] exclude_List = Exclude_List.Text.Split(';');
+
+			List<String> File_Types = new List<string>();
+			List<int> F_count = new List<int>();
+
+			File_Types.Capacity = 0;
+			F_count.Capacity = 0;
 
 			foreach (string fileName in fileEntries)
 			{
@@ -84,6 +87,20 @@ namespace File_Sorter
 					{
 						Directory.CreateDirectory(D_Path + "\\" + f_Type);
 					}
+
+					if (give_Record == true)
+					{
+						if (File_Types.Contains(f_Type) == false)
+						{
+							File_Types.Add(f_Type);
+							F_count.Add(1);
+						}
+						else
+						{
+							var indexer = File_Types.IndexOf(f_Type);
+							F_count[indexer]++;
+						}
+					}
 					Directory.Move(fileName, fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));
 				}
 			}
@@ -96,7 +113,6 @@ namespace File_Sorter
 		private void F_Path_TextChanged(object sender, EventArgs e)
 		{
 			D_Path = F_Path.Text;
-			Organize.Enabled = true;
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
@@ -119,12 +135,46 @@ namespace File_Sorter
 		{
 			FolderBrowser.ShowDialog();
 			D_Path = FolderBrowser.SelectedPath;
-			if(D_Path.Length != 0)
-			{
-				Organize.Enabled = true;
-			}
 			F_Path.Text = D_Path;
 			FolderBrowser.Dispose();
+		}
+
+		private void Monitor_CheckedChanged(object sender, EventArgs e)
+		{
+			if(Monitor.Checked == true)
+			{
+				if (F_Path.Text != "")
+				{
+					F_Path.Enabled = false;
+					Organize.Visible = false;
+					fileSystemWatcher1.Path = F_Path.Text;
+					fileSystemWatcher1.NotifyFilter = NotifyFilters.CreationTime;
+
+					//fileSystemWatcher1.Changed += new FileSystemEventHandler(OnChanged);
+					fileSystemWatcher1.Created += new FileSystemEventHandler(fileSystemWatcher1_Changed);
+					//fileSystemWatcher1.Deleted += new FileSystemEventHandler(OnChanged);
+					//fileSystemWatcher1.Renamed += new RenamedEventHandler(OnRenamed);
+
+					fileSystemWatcher1.EnableRaisingEvents = true;
+				}
+				else
+				{
+					MessageBox.Show("Enter a path to Monitor");
+					Monitor.Checked = false;
+					return;
+				}
+			}
+			else
+			{
+				fileSystemWatcher1.EndInit();
+				Organize.Visible = true;
+				F_Path.Enabled = true;
+			}
+		}
+
+		private void fileSystemWatcher1_Changed(object sender, FileSystemEventArgs e)
+		{
+			
 		}
 	}
 }

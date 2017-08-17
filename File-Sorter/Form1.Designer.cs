@@ -43,7 +43,6 @@
 			// 
 			// Organize
 			// 
-			this.Organize.Enabled = false;
 			this.Organize.Location = new System.Drawing.Point(529, 11);
 			this.Organize.Name = "Organize";
 			this.Organize.Size = new System.Drawing.Size(122, 21);
@@ -74,6 +73,7 @@
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Cursor = System.Windows.Forms.Cursors.PanEast;
+			this.label1.ForeColor = System.Drawing.SystemColors.Window;
 			this.label1.Location = new System.Drawing.Point(9, 12);
 			this.label1.MaximumSize = new System.Drawing.Size(40, 80);
 			this.label1.Name = "label1";
@@ -99,6 +99,7 @@
 			// Exclude
 			// 
 			this.Exclude.AutoSize = true;
+			this.Exclude.ForeColor = System.Drawing.SystemColors.Window;
 			this.Exclude.Location = new System.Drawing.Point(44, 40);
 			this.Exclude.Name = "Exclude";
 			this.Exclude.Size = new System.Drawing.Size(64, 17);
@@ -116,17 +117,20 @@
 			// Monitor
 			// 
 			this.Monitor.AutoSize = true;
+			this.Monitor.ForeColor = System.Drawing.SystemColors.Window;
 			this.Monitor.Location = new System.Drawing.Point(430, 39);
 			this.Monitor.Name = "Monitor";
 			this.Monitor.Size = new System.Drawing.Size(61, 17);
 			this.Monitor.TabIndex = 6;
 			this.Monitor.Text = "Monitor";
 			this.Monitor.UseVisualStyleBackColor = true;
+			this.Monitor.CheckedChanged += new System.EventHandler(this.Monitor_CheckedChanged);
 			// 
 			// fileSystemWatcher1
 			// 
 			this.fileSystemWatcher1.EnableRaisingEvents = true;
 			this.fileSystemWatcher1.SynchronizingObject = this;
+			this.fileSystemWatcher1.Changed += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
 			// 
 			// Form1
 			// 
@@ -135,7 +139,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.AutoSize = true;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.BackColor = System.Drawing.Color.White;
+			this.BackColor = System.Drawing.Color.DimGray;
 			this.ClientSize = new System.Drawing.Size(666, 115);
 			this.Controls.Add(this.Monitor);
 			this.Controls.Add(this.Exclude_List);
@@ -145,6 +149,7 @@
 			this.Controls.Add(this.F_Path);
 			this.Controls.Add(this.Organize);
 			this.Cursor = System.Windows.Forms.Cursors.Default;
+			this.ForeColor = System.Drawing.SystemColors.Window;
 			this.HelpButton = true;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "Form1";
