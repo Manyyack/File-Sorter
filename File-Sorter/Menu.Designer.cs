@@ -31,10 +31,10 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.toolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.monitoringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.monitoringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -56,6 +56,13 @@
 			this.toolToolStripMenuItem.Name = "toolToolStripMenuItem";
 			this.toolToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
 			this.toolToolStripMenuItem.Text = "Tools";
+			// 
+			// monitoringToolStripMenuItem
+			// 
+			this.monitoringToolStripMenuItem.Name = "monitoringToolStripMenuItem";
+			this.monitoringToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.monitoringToolStripMenuItem.Text = "Monitoring";
+			this.monitoringToolStripMenuItem.Click += new System.EventHandler(this.monitoringToolStripMenuItem_Click);
 			// 
 			// aboutToolStripMenuItem
 			// 
@@ -79,12 +86,6 @@
 			this.aboutFileToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
 			this.aboutFileToolStripMenuItem.Text = "About File Sorter";
 			this.aboutFileToolStripMenuItem.Click += new System.EventHandler(this.aboutFileToolStripMenuItem_Click);
-			// 
-			// monitoringToolStripMenuItem
-			// 
-			this.monitoringToolStripMenuItem.Name = "monitoringToolStripMenuItem";
-			this.monitoringToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.monitoringToolStripMenuItem.Text = "Monitoring";
 			// 
 			// Menu
 			// 

@@ -14,6 +14,8 @@ namespace File_Sorter
 	{
 
 		bool about_Form_Already_Opened = false;
+		bool help_Already_Opened = false;
+		bool monitoring_Already_Opened = false;
 
 		public Menu()
 		{
@@ -29,6 +31,16 @@ namespace File_Sorter
 		private void viewHelpToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			//link to mohit's video.
+			if (help_Already_Opened == false)
+			{
+				HelpForm help = new HelpForm();
+				help.FormClosed += new FormClosedEventHandler(helpClosed);
+				help.MdiParent = this;
+				help.Dock = DockStyle.Fill;
+				help.WindowState = FormWindowState.Normal;
+				help_Already_Opened = true;
+				help.Show();
+			}
 		}
 
 		private void aboutFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -42,9 +54,35 @@ namespace File_Sorter
 			}	
 		}
 
+		private void monitoringToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (monitoring_Already_Opened == false)
+			{
+				MonitorForm monitoring = new MonitorForm();
+				monitoring.FormClosed += new FormClosedEventHandler(monitorClosed);
+				monitoring.MdiParent = this;
+				monitoring.Dock = DockStyle.Fill;
+				monitoring.WindowState = FormWindowState.Normal;
+				monitoring_Already_Opened = true;
+				monitoring.Show();
+			}
+		}
+
 		void aboutClosed(object sender,FormClosedEventArgs e)
 		{
 			about_Form_Already_Opened = false;
 		}
+
+		void helpClosed(object sender, FormClosedEventArgs e)
+		{
+			help_Already_Opened = false;
+		}
+
+		void monitorClosed(object sender, FormClosedEventArgs e)
+		{
+			monitoring_Already_Opened = false;
+		}
+
+
 	}
 }
