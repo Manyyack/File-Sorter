@@ -8,11 +8,11 @@ namespace File_Sorter
 {
 	public partial class Form1 : Form
 	{
-		String D_Path;		
+		String D_Path;
 
 		public Form1()
 		{
-			InitializeComponent();			
+			InitializeComponent();
 		}
 
 		private void Connect_Click(object sender, EventArgs e)
@@ -20,7 +20,7 @@ namespace File_Sorter
 			changeDirectoryAndOrganize(F_Path.Text, true, true);
 		}
 
-		void changeDirectoryAndOrganize(string path_to_dir,bool user_message,bool give_Record)
+		void changeDirectoryAndOrganize(string path_to_dir, bool user_message, bool give_Record)
 		{
 			try
 			{
@@ -104,7 +104,7 @@ namespace File_Sorter
 					}
 
 					Directory.Move(fileName, fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));
-				}	
+				}
 			}
 			if (user_message == true)
 			{
@@ -131,7 +131,7 @@ namespace File_Sorter
 				file_info[indexer] = new Label();
 
 				file_info[indexer].Text = F_count[indexer].ToString() + " " + thistypes + " File";
-				if(F_count[indexer] > 1)
+				if (F_count[indexer] > 1)
 				{
 					file_info[indexer].Text += "s";
 				}
@@ -145,19 +145,19 @@ namespace File_Sorter
 				folder_Open[indexer].Text = "Open " + thistypes.ToUpper();
 				folder_Open[indexer].Click += new EventHandler(openFolder);
 
-				if(indexer == 0)
+				if (indexer == 0)
 				{
-					file_info[indexer].Location = new System.Drawing.Point(X_Start,Y_Start);
-					folder_Open[indexer].Location = new System.Drawing.Point(file_info[indexer].Width + Button_Offset_Frm_Label,file_info[indexer].Location.Y);
+					file_info[indexer].Location = new System.Drawing.Point(X_Start, Y_Start);
+					folder_Open[indexer].Location = new System.Drawing.Point(file_info[indexer].Width + Button_Offset_Frm_Label, file_info[indexer].Location.Y);
 				}
 				else
 				{
 					folder_Open[indexer].Location = new System.Drawing.Point(folder_Open[indexer - 1].Location.X, folder_Open[indexer - 1].Location.Y + Offset_Bwtn_Button + folder_Open[indexer - 1].Height);
-					file_info[indexer].Location = new System.Drawing.Point(file_info[indexer - 1].Location.X,folder_Open[indexer].Location.Y);
+					file_info[indexer].Location = new System.Drawing.Point(file_info[indexer - 1].Location.X, folder_Open[indexer].Location.Y);
 				}
 
 				Button_Box.Height = folder_Open[indexer].Height + folder_Open[indexer].Location.Y + Group_Box_Offset;
-				Button_Box.Width = folder_Open[indexer].Width + folder_Open[indexer].Location.X + Group_Box_Offset; 
+				Button_Box.Width = folder_Open[indexer].Width + folder_Open[indexer].Location.X + Group_Box_Offset;
 				Button_Box.Controls.Add(file_info[indexer]);
 				Button_Box.Controls.Add(folder_Open[indexer]);
 
@@ -168,11 +168,11 @@ namespace File_Sorter
 			//Button_Box.Visible = true;
 		}
 
-		void openFolder(object sender,EventArgs e)
+		void openFolder(object sender, EventArgs e)
 		{
 			Console.WriteLine(sender.ToString());
 			var temp = sender.ToString().LastIndexOf(' ');
-			string folder_Name = sender.ToString().Substring(temp+1);
+			string folder_Name = sender.ToString().Substring(temp + 1);
 			string path_to_folder = D_Path + "\\" + folder_Name;
 			Console.WriteLine(folder_Name);
 			Console.WriteLine(path_to_folder);
@@ -213,7 +213,7 @@ namespace File_Sorter
 
 		private void Monitor_CheckedChanged(object sender, EventArgs e)
 		{
-			if(Monitor.Checked == true)
+			if (Monitor.Checked == true)
 			{
 				if (F_Path.Text != "")
 				{
@@ -229,11 +229,10 @@ namespace File_Sorter
 				}
 			}
 			else
-			{ 
+			{
 				Organize.Visible = true;
 				F_Path.Enabled = true;
 			}
-		}
+		}	
 	}
 }
-		

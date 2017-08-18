@@ -27,7 +27,7 @@ namespace File_Sorter
 				return;
 			}
 
-			Application.Run(new Form1());
+			Application.Run(new Menu());
 		}
 	}
 }
