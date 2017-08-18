@@ -22,6 +22,9 @@ namespace File_Sorter
 
 		void changeDirectoryAndOrganize(string path_to_dir, bool user_message, bool give_Record)
 		{
+			Button_Panel.Visible = false;
+			Button_Box.Visible = false;
+
 			try
 			{
 				Directory.SetCurrentDirectory(path_to_dir);
@@ -59,13 +62,6 @@ namespace File_Sorter
 			foreach (string fileName in fileEntries)
 			{
 				bool do_Not_Move_F = false;
-
-				//if(fileName.Contains("(1)")==true)
-				//{
-				//	//to run the code to delete the file
-				//	Console.WriteLine("Deleting " + fileName);
-				//	File.Delete(fileName);
-				//}
 
 				var f_Pos = fileName.LastIndexOf('.');
 				string f_Type = fileName.Substring(f_Pos + 1).ToUpper();
@@ -113,7 +109,12 @@ namespace File_Sorter
 
 			Button[] folder_Open = new Button[File_Types.Count];
 			Label[] file_info = new Label[File_Types.Count];
-			ToolTip button = new ToolTip();
+			ToolTip button_info = new ToolTip();
+
+			button_info.AutoPopDelay = 5000;
+			button_info.InitialDelay = 500;
+			button_info.ReshowDelay = 500;
+			button_info.ShowAlways = true;
 
 			Button_Panel.Visible = true;
 			Button_Box.Visible = true;
@@ -130,7 +131,7 @@ namespace File_Sorter
 				folder_Open[indexer] = new Button();
 				file_info[indexer] = new Label();
 
-				file_info[indexer].Text = F_count[indexer].ToString() + " " + thistypes + " File";
+				file_info[indexer].Text = F_count[indexer].ToString() + " ." + thistypes.ToLower() + " File";
 				if (F_count[indexer] > 1)
 				{
 					file_info[indexer].Text += "s";
@@ -144,6 +145,8 @@ namespace File_Sorter
 				folder_Open[indexer].ForeColor = Organize.ForeColor;
 				folder_Open[indexer].Text = "Open " + thistypes.ToUpper();
 				folder_Open[indexer].Click += new EventHandler(openFolder);
+
+				button_info.SetToolTip(folder_Open[indexer], "Click to open " + thistypes + " files");
 
 				if (indexer == 0)
 				{
@@ -161,7 +164,7 @@ namespace File_Sorter
 				Button_Box.Controls.Add(file_info[indexer]);
 				Button_Box.Controls.Add(folder_Open[indexer]);
 
-				Console.WriteLine("Files operated of " + thistypes + " are " + F_count[indexer].ToString());
+				//Console.WriteLine("Files operated of " + thistypes + " are " + F_count[indexer].ToString());
 			}
 
 			Button_Panel.Width = Button_Box.Width + 25;
@@ -170,14 +173,12 @@ namespace File_Sorter
 
 		void openFolder(object sender, EventArgs e)
 		{
-			Console.WriteLine(sender.ToString());
+			//Console.WriteLine(sender.ToString());
 			var temp = sender.ToString().LastIndexOf(' ');
 			string folder_Name = sender.ToString().Substring(temp + 1);
 			string path_to_folder = D_Path + "\\" + folder_Name;
-			Console.WriteLine(folder_Name);
-			Console.WriteLine(path_to_folder);
-
-			//Process.Start("explorer.exe", "/select , \"" + path_to_folder + "\"");
+			//Console.WriteLine(folder_Name);
+			//Console.WriteLine(path_to_folder);
 			Process.Start(@path_to_folder);
 
 		}
@@ -209,30 +210,6 @@ namespace File_Sorter
 			D_Path = FolderBrowser.SelectedPath;
 			F_Path.Text = D_Path;
 			FolderBrowser.Dispose();
-		}
-
-		private void Monitor_CheckedChanged(object sender, EventArgs e)
-		{
-			if (Monitor.Checked == true)
-			{
-				if (F_Path.Text != "")
-				{
-					F_Path.Enabled = false;
-					Organize.Visible = false;
-					//code to monitor the changes in file to sort.
-				}
-				else
-				{
-					MessageBox.Show("Enter a path to Monitor");
-					Monitor.Checked = false;
-					return;
-				}
-			}
-			else
-			{
-				Organize.Visible = true;
-				F_Path.Enabled = true;
-			}
 		}	
 	}
 }

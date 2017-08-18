@@ -36,7 +36,6 @@
 			this.FolderBrowser = new System.Windows.Forms.FolderBrowserDialog();
 			this.Exclude = new System.Windows.Forms.CheckBox();
 			this.Exclude_List = new System.Windows.Forms.TextBox();
-			this.Monitor = new System.Windows.Forms.CheckBox();
 			this.Button_Box = new System.Windows.Forms.GroupBox();
 			this.Button_Panel = new System.Windows.Forms.Panel();
 			this.Button_Panel.SuspendLayout();
@@ -46,7 +45,7 @@
 			// 
 			this.Organize.BackColor = System.Drawing.SystemColors.Control;
 			this.Organize.ForeColor = System.Drawing.SystemColors.MenuText;
-			this.Organize.Location = new System.Drawing.Point(530, 30);
+			this.Organize.Location = new System.Drawing.Point(530, 11);
 			this.Organize.Name = "Organize";
 			this.Organize.Size = new System.Drawing.Size(122, 22);
 			this.Organize.TabIndex = 0;
@@ -61,7 +60,7 @@
 			this.F_Path.BackColor = System.Drawing.Color.White;
 			this.F_Path.DetectUrls = false;
 			this.F_Path.EnableAutoDragDrop = true;
-			this.F_Path.Location = new System.Drawing.Point(45, 31);
+			this.F_Path.Location = new System.Drawing.Point(45, 12);
 			this.F_Path.Multiline = false;
 			this.F_Path.Name = "F_Path";
 			this.F_Path.Size = new System.Drawing.Size(447, 21);
@@ -74,7 +73,7 @@
 			this.label1.AutoSize = true;
 			this.label1.Cursor = System.Windows.Forms.Cursors.PanEast;
 			this.label1.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-			this.label1.Location = new System.Drawing.Point(10, 34);
+			this.label1.Location = new System.Drawing.Point(10, 15);
 			this.label1.MaximumSize = new System.Drawing.Size(40, 80);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(29, 13);
@@ -85,7 +84,7 @@
 			// 
 			this.Browse.BackColor = System.Drawing.Color.Transparent;
 			this.Browse.ForeColor = System.Drawing.SystemColors.InfoText;
-			this.Browse.Location = new System.Drawing.Point(498, 29);
+			this.Browse.Location = new System.Drawing.Point(498, 10);
 			this.Browse.Name = "Browse";
 			this.Browse.Size = new System.Drawing.Size(26, 23);
 			this.Browse.TabIndex = 3;
@@ -101,7 +100,7 @@
 			// 
 			this.Exclude.AutoSize = true;
 			this.Exclude.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-			this.Exclude.Location = new System.Drawing.Point(45, 59);
+			this.Exclude.Location = new System.Drawing.Point(45, 42);
 			this.Exclude.Name = "Exclude";
 			this.Exclude.Size = new System.Drawing.Size(64, 17);
 			this.Exclude.TabIndex = 4;
@@ -110,25 +109,14 @@
 			// 
 			// Exclude_List
 			// 
-			this.Exclude_List.Location = new System.Drawing.Point(105, 59);
+			this.Exclude_List.Location = new System.Drawing.Point(115, 40);
 			this.Exclude_List.Name = "Exclude_List";
-			this.Exclude_List.Size = new System.Drawing.Size(209, 20);
+			this.Exclude_List.Size = new System.Drawing.Size(238, 20);
 			this.Exclude_List.TabIndex = 5;
-			// 
-			// Monitor
-			// 
-			this.Monitor.AutoSize = true;
-			this.Monitor.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-			this.Monitor.Location = new System.Drawing.Point(431, 57);
-			this.Monitor.Name = "Monitor";
-			this.Monitor.Size = new System.Drawing.Size(61, 17);
-			this.Monitor.TabIndex = 6;
-			this.Monitor.Text = "Monitor";
-			this.Monitor.UseVisualStyleBackColor = true;
-			this.Monitor.CheckedChanged += new System.EventHandler(this.Monitor_CheckedChanged);
 			// 
 			// Button_Box
 			// 
+			this.Button_Box.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
 			this.Button_Box.Location = new System.Drawing.Point(3, 3);
 			this.Button_Box.Name = "Button_Box";
 			this.Button_Box.Size = new System.Drawing.Size(200, 20);
@@ -141,9 +129,9 @@
 			// 
 			this.Button_Panel.AutoScroll = true;
 			this.Button_Panel.Controls.Add(this.Button_Box);
-			this.Button_Panel.Location = new System.Drawing.Point(13, 85);
+			this.Button_Panel.Location = new System.Drawing.Point(13, 66);
 			this.Button_Panel.Name = "Button_Panel";
-			this.Button_Panel.Size = new System.Drawing.Size(209, 274);
+			this.Button_Panel.Size = new System.Drawing.Size(209, 295);
 			this.Button_Panel.TabIndex = 7;
 			this.Button_Panel.Visible = false;
 			// 
@@ -156,7 +144,6 @@
 			this.ClientSize = new System.Drawing.Size(666, 366);
 			this.ControlBox = false;
 			this.Controls.Add(this.Button_Panel);
-			this.Controls.Add(this.Monitor);
 			this.Controls.Add(this.Exclude_List);
 			this.Controls.Add(this.Exclude);
 			this.Controls.Add(this.Browse);
@@ -189,7 +176,6 @@
 		private System.Windows.Forms.FolderBrowserDialog FolderBrowser;
 		private System.Windows.Forms.CheckBox Exclude;
 		private System.Windows.Forms.TextBox Exclude_List;
-		private System.Windows.Forms.CheckBox Monitor;
 		private System.Windows.Forms.GroupBox Button_Box;
 		private System.Windows.Forms.Panel Button_Panel;
 	}
