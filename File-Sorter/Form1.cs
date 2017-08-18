@@ -111,24 +111,48 @@ namespace File_Sorter
 			}
 
 			Button[] folder_Open = new Button[File_Types.Count];
+			Label[] file_info = new Label[File_Types.Count];
+
+			Button_Box.Visible = true;
+			int offset = 10;
 
 			foreach (string thistypes in File_Types)
 			{
 				int indexer = File_Types.IndexOf(thistypes);
 				folder_Open[indexer] = new Button();
+				file_info[indexer] = new Label();
+
+				file_info[indexer].Text = F_count[indexer].ToString() + " " + thistypes;
+				if(F_count[indexer] > 1)
+				{
+					file_info[indexer].Text += "s";
+				}
+				file_info[indexer].ForeColor = label1.ForeColor;
 
 				folder_Open[indexer].Width = Organize.Width;
 				folder_Open[indexer].Height = Organize.Height;
 				folder_Open[indexer].BackColor = Organize.BackColor;
 				folder_Open[indexer].ForeColor = Organize.ForeColor;
 				folder_Open[indexer].Text = "Open " + thistypes.ToUpper();
+				
+				if(indexer == 0)
+				{
+					file_info[indexer].Location = new System.Drawing.Point(10, 20);
+					folder_Open[indexer].Location = new System.Drawing.Point(file_info[indexer].Width + 20,file_info[indexer].Location.Y);
+				}
+				else
+				{
+					folder_Open[indexer].Location = new System.Drawing.Point(folder_Open[indexer - 1].Location.X, folder_Open[indexer - 1].Location.Y + offset + folder_Open[indexer - 1].Height);
+					file_info[indexer].Location = new System.Drawing.Point(file_info[indexer - 1].Location.X,folder_Open[indexer].Location.Y);
+				}
 
+				Button_Box.Controls.Add(file_info[indexer]);
 				Button_Box.Controls.Add(folder_Open[indexer]);
 
 				Console.WriteLine("Files operated of " + thistypes + " are " + F_count[indexer].ToString());
 			}
 
-			Button_Box.Visible = true;
+			//Button_Box.Visible = true;
 		}
 
 		private void F_Path_TextChanged(object sender, EventArgs e)
@@ -168,15 +192,7 @@ namespace File_Sorter
 				{
 					F_Path.Enabled = false;
 					Organize.Visible = false;
-					fileSystemWatcher1.Path = F_Path.Text;
-					fileSystemWatcher1.NotifyFilter = NotifyFilters.CreationTime;
-
-					//fileSystemWatcher1.Changed += new FileSystemEventHandler(OnChanged);
-					fileSystemWatcher1.Created += new FileSystemEventHandler(fileSystemWatcher1_Changed);
-					//fileSystemWatcher1.Deleted += new FileSystemEventHandler(OnChanged);
-					//fileSystemWatcher1.Renamed += new RenamedEventHandler(OnRenamed);
-
-					fileSystemWatcher1.EnableRaisingEvents = true;
+					//code to monitor the changes in file to sort.
 				}
 				else
 				{
@@ -186,16 +202,10 @@ namespace File_Sorter
 				}
 			}
 			else
-			{
-				fileSystemWatcher1.EndInit();
+			{ 
 				Organize.Visible = true;
 				F_Path.Enabled = true;
 			}
-		}
-
-		private void fileSystemWatcher1_Changed(object sender, FileSystemEventArgs e)
-		{
-			
 		}
 	}
 }

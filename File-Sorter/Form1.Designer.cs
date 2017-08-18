@@ -57,9 +57,6 @@
 			// F_Path
 			// 
 			this.F_Path.AcceptsTab = true;
-			this.F_Path.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.F_Path.AutoWordSelection = true;
 			this.F_Path.BackColor = System.Drawing.Color.White;
 			this.F_Path.DetectUrls = false;
@@ -67,7 +64,7 @@
 			this.F_Path.Location = new System.Drawing.Point(44, 12);
 			this.F_Path.Multiline = false;
 			this.F_Path.Name = "F_Path";
-			this.F_Path.Size = new System.Drawing.Size(447, 22);
+			this.F_Path.Size = new System.Drawing.Size(447, 21);
 			this.F_Path.TabIndex = 1;
 			this.F_Path.Text = "";
 			this.F_Path.TextChanged += new System.EventHandler(this.F_Path_TextChanged);
@@ -134,16 +131,19 @@
 			// 
 			this.fileSystemWatcher1.EnableRaisingEvents = true;
 			this.fileSystemWatcher1.SynchronizingObject = this;
-			this.fileSystemWatcher1.Changed += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
 			// 
 			// Button_Box
 			// 
+			this.Button_Box.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.Button_Box.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
 			this.Button_Box.Location = new System.Drawing.Point(12, 66);
+			this.Button_Box.Margin = new System.Windows.Forms.Padding(0);
 			this.Button_Box.Name = "Button_Box";
-			this.Button_Box.Size = new System.Drawing.Size(639, 64);
+			this.Button_Box.Padding = new System.Windows.Forms.Padding(0);
+			this.Button_Box.Size = new System.Drawing.Size(327, 295);
 			this.Button_Box.TabIndex = 7;
 			this.Button_Box.TabStop = false;
-			this.Button_Box.Text = "Button_Box";
+			this.Button_Box.Text = "File Information";
 			this.Button_Box.Visible = false;
 			// 
 			// Form1
@@ -152,7 +152,7 @@
 			this.AllowDrop = true;
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.Silver;
-			this.ClientSize = new System.Drawing.Size(666, 159);
+			this.ClientSize = new System.Drawing.Size(668, 373);
 			this.Controls.Add(this.Button_Box);
 			this.Controls.Add(this.Monitor);
 			this.Controls.Add(this.Exclude_List);
