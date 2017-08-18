@@ -37,9 +37,9 @@
 			this.Exclude = new System.Windows.Forms.CheckBox();
 			this.Exclude_List = new System.Windows.Forms.TextBox();
 			this.Monitor = new System.Windows.Forms.CheckBox();
-			this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
 			this.Button_Box = new System.Windows.Forms.GroupBox();
-			((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+			this.Button_Panel = new System.Windows.Forms.Panel();
+			this.Button_Panel.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// Organize
@@ -127,24 +127,25 @@
 			this.Monitor.UseVisualStyleBackColor = true;
 			this.Monitor.CheckedChanged += new System.EventHandler(this.Monitor_CheckedChanged);
 			// 
-			// fileSystemWatcher1
-			// 
-			this.fileSystemWatcher1.EnableRaisingEvents = true;
-			this.fileSystemWatcher1.SynchronizingObject = this;
-			// 
 			// Button_Box
 			// 
-			this.Button_Box.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.Button_Box.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-			this.Button_Box.Location = new System.Drawing.Point(12, 66);
-			this.Button_Box.Margin = new System.Windows.Forms.Padding(0);
+			this.Button_Box.Location = new System.Drawing.Point(3, 3);
 			this.Button_Box.Name = "Button_Box";
-			this.Button_Box.Padding = new System.Windows.Forms.Padding(0);
-			this.Button_Box.Size = new System.Drawing.Size(327, 295);
-			this.Button_Box.TabIndex = 7;
+			this.Button_Box.Size = new System.Drawing.Size(200, 20);
+			this.Button_Box.TabIndex = 0;
 			this.Button_Box.TabStop = false;
-			this.Button_Box.Text = "File Information";
+			this.Button_Box.Text = "Folder Information";
 			this.Button_Box.Visible = false;
+			// 
+			// Button_Panel
+			// 
+			this.Button_Panel.AutoScroll = true;
+			this.Button_Panel.Controls.Add(this.Button_Box);
+			this.Button_Panel.Location = new System.Drawing.Point(12, 66);
+			this.Button_Panel.Name = "Button_Panel";
+			this.Button_Panel.Size = new System.Drawing.Size(209, 251);
+			this.Button_Panel.TabIndex = 7;
+			this.Button_Panel.Visible = false;
 			// 
 			// Form1
 			// 
@@ -152,8 +153,8 @@
 			this.AllowDrop = true;
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.Silver;
-			this.ClientSize = new System.Drawing.Size(668, 373);
-			this.Controls.Add(this.Button_Box);
+			this.ClientSize = new System.Drawing.Size(693, 322);
+			this.Controls.Add(this.Button_Panel);
 			this.Controls.Add(this.Monitor);
 			this.Controls.Add(this.Exclude_List);
 			this.Controls.Add(this.Exclude);
@@ -170,7 +171,7 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "File Sorter";
 			this.Load += new System.EventHandler(this.Form1_Load);
-			((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+			this.Button_Panel.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -186,8 +187,8 @@
 		private System.Windows.Forms.CheckBox Exclude;
 		private System.Windows.Forms.TextBox Exclude_List;
 		private System.Windows.Forms.CheckBox Monitor;
-		private System.IO.FileSystemWatcher fileSystemWatcher1;
 		private System.Windows.Forms.GroupBox Button_Box;
+		private System.Windows.Forms.Panel Button_Panel;
 	}
 }
 

@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.IO;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace File_Sorter
 {
@@ -112,9 +113,16 @@ namespace File_Sorter
 
 			Button[] folder_Open = new Button[File_Types.Count];
 			Label[] file_info = new Label[File_Types.Count];
+			ToolTip button = new ToolTip();
 
+			Button_Panel.Visible = true;
 			Button_Box.Visible = true;
-			int offset = 10;
+
+			int X_Start = 10;
+			int Y_Start = 20;
+			int Button_Offset_Frm_Label = 10;
+			int Offset_Bwtn_Button = 10;
+			int Group_Box_Offset = 10;
 
 			foreach (string thistypes in File_Types)
 			{
@@ -122,11 +130,12 @@ namespace File_Sorter
 				folder_Open[indexer] = new Button();
 				file_info[indexer] = new Label();
 
-				file_info[indexer].Text = F_count[indexer].ToString() + " " + thistypes;
+				file_info[indexer].Text = F_count[indexer].ToString() + " " + thistypes + " File";
 				if(F_count[indexer] > 1)
 				{
 					file_info[indexer].Text += "s";
 				}
+
 				file_info[indexer].ForeColor = label1.ForeColor;
 
 				folder_Open[indexer].Width = Organize.Width;
@@ -134,25 +143,43 @@ namespace File_Sorter
 				folder_Open[indexer].BackColor = Organize.BackColor;
 				folder_Open[indexer].ForeColor = Organize.ForeColor;
 				folder_Open[indexer].Text = "Open " + thistypes.ToUpper();
-				
+				folder_Open[indexer].Click += new EventHandler(openFolder);
+
 				if(indexer == 0)
 				{
-					file_info[indexer].Location = new System.Drawing.Point(10, 20);
-					folder_Open[indexer].Location = new System.Drawing.Point(file_info[indexer].Width + 20,file_info[indexer].Location.Y);
+					file_info[indexer].Location = new System.Drawing.Point(X_Start,Y_Start);
+					folder_Open[indexer].Location = new System.Drawing.Point(file_info[indexer].Width + Button_Offset_Frm_Label,file_info[indexer].Location.Y);
 				}
 				else
 				{
-					folder_Open[indexer].Location = new System.Drawing.Point(folder_Open[indexer - 1].Location.X, folder_Open[indexer - 1].Location.Y + offset + folder_Open[indexer - 1].Height);
+					folder_Open[indexer].Location = new System.Drawing.Point(folder_Open[indexer - 1].Location.X, folder_Open[indexer - 1].Location.Y + Offset_Bwtn_Button + folder_Open[indexer - 1].Height);
 					file_info[indexer].Location = new System.Drawing.Point(file_info[indexer - 1].Location.X,folder_Open[indexer].Location.Y);
 				}
 
+				Button_Box.Height = folder_Open[indexer].Height + folder_Open[indexer].Location.Y + Group_Box_Offset;
+				Button_Box.Width = folder_Open[indexer].Width + folder_Open[indexer].Location.X + Group_Box_Offset; 
 				Button_Box.Controls.Add(file_info[indexer]);
 				Button_Box.Controls.Add(folder_Open[indexer]);
 
 				Console.WriteLine("Files operated of " + thistypes + " are " + F_count[indexer].ToString());
 			}
 
+			Button_Panel.Width = Button_Box.Width + 25;
 			//Button_Box.Visible = true;
+		}
+
+		void openFolder(object sender,EventArgs e)
+		{
+			Console.WriteLine(sender.ToString());
+			var temp = sender.ToString().LastIndexOf(' ');
+			string folder_Name = sender.ToString().Substring(temp+1);
+			string path_to_folder = D_Path + "\\" + folder_Name;
+			Console.WriteLine(folder_Name);
+			Console.WriteLine(path_to_folder);
+
+			//Process.Start("explorer.exe", "/select , \"" + path_to_folder + "\"");
+			Process.Start(@path_to_folder);
+
 		}
 
 		private void F_Path_TextChanged(object sender, EventArgs e)
