@@ -15,6 +15,7 @@ namespace File_Sorter
 		public About()
 		{
 			InitializeComponent();
+			Version.Text += Application.ProductVersion;
 		}
 	}
 }

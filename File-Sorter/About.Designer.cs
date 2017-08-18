@@ -32,6 +32,7 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
+			this.Version = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -39,11 +40,11 @@
 			this.label1.AutoSize = true;
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-			this.label1.Location = new System.Drawing.Point(66, 20);
+			this.label1.Location = new System.Drawing.Point(88, 18);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(168, 20);
+			this.label1.Size = new System.Drawing.Size(126, 20);
 			this.label1.TabIndex = 0;
-			this.label1.Text = "FILE SORTER V1.1";
+			this.label1.Text = "FILE SORTER";
 			// 
 			// label2
 			// 
@@ -77,12 +78,23 @@
 			this.label4.TabIndex = 3;
 			this.label4.Text = " Version 3, 29 June 2007";
 			// 
+			// Version
+			// 
+			this.Version.AutoSize = true;
+			this.Version.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Version.Location = new System.Drawing.Point(89, 38);
+			this.Version.Name = "Version";
+			this.Version.Size = new System.Drawing.Size(60, 17);
+			this.Version.TabIndex = 4;
+			this.Version.Text = "Version ";
+			// 
 			// About
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.Silver;
 			this.ClientSize = new System.Drawing.Size(304, 180);
+			this.Controls.Add(this.Version);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
@@ -105,5 +117,6 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Label Version;
 	}
 }
