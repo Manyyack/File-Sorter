@@ -12,6 +12,9 @@ namespace File_Sorter
 {
 	public partial class Menu : Form
 	{
+
+		bool about_Form_Already_Opened = false;
+
 		public Menu()
 		{
 			InitializeComponent();
@@ -30,9 +33,18 @@ namespace File_Sorter
 
 		private void aboutFileToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			Form abt = new About();
-			abt.Dock = DockStyle.Right;
-			abt.Show();
+			if (about_Form_Already_Opened == false)
+			{
+				Form abt = new About();
+				abt.FormClosed += new FormClosedEventHandler(aboutClosed);
+				abt.Show();
+				about_Form_Already_Opened = true;
+			}	
+		}
+
+		void aboutClosed(object sender,FormClosedEventArgs e)
+		{
+			about_Form_Already_Opened = false;
 		}
 	}
 }
