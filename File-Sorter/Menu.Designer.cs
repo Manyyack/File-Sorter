@@ -34,6 +34,7 @@
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.monitoringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -50,6 +51,8 @@
 			// 
 			// toolToolStripMenuItem
 			// 
+			this.toolToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.monitoringToolStripMenuItem});
 			this.toolToolStripMenuItem.Name = "toolToolStripMenuItem";
 			this.toolToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
 			this.toolToolStripMenuItem.Text = "Tools";
@@ -77,6 +80,12 @@
 			this.aboutFileToolStripMenuItem.Text = "About File Sorter";
 			this.aboutFileToolStripMenuItem.Click += new System.EventHandler(this.aboutFileToolStripMenuItem_Click);
 			// 
+			// monitoringToolStripMenuItem
+			// 
+			this.monitoringToolStripMenuItem.Name = "monitoringToolStripMenuItem";
+			this.monitoringToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.monitoringToolStripMenuItem.Text = "Monitoring";
+			// 
 			// Menu
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -102,5 +111,6 @@
 		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem viewHelpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem aboutFileToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem monitoringToolStripMenuItem;
 	}
 }
