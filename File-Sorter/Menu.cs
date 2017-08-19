@@ -20,7 +20,7 @@ namespace File_Sorter
 		public Menu()
 		{
 			InitializeComponent();
-			
+			this.MaximizeBox = false;
 			Form sorter = new Form1();
 			sorter.MdiParent = this;
 			sorter.Dock = DockStyle.Fill;
@@ -40,6 +40,7 @@ namespace File_Sorter
 				help.WindowState = FormWindowState.Normal;
 				help_Already_Opened = true;
 				help.Show();
+				menuStrip1.Enabled = false;
 			}
 		}
 
@@ -49,8 +50,12 @@ namespace File_Sorter
 			{
 				Form abt = new About();
 				abt.FormClosed += new FormClosedEventHandler(aboutClosed);
+				abt.MdiParent = this;
+				abt.Dock = DockStyle.Fill;
+				abt.WindowState = FormWindowState.Normal; 
 				abt.Show();
 				about_Form_Already_Opened = true;
+				menuStrip1.Enabled = false;
 			}	
 		}
 
@@ -65,22 +70,26 @@ namespace File_Sorter
 				monitoring.WindowState = FormWindowState.Normal;
 				monitoring_Already_Opened = true;
 				monitoring.Show();
+				menuStrip1.Enabled = false;
 			}
 		}
 
 		void aboutClosed(object sender,FormClosedEventArgs e)
 		{
 			about_Form_Already_Opened = false;
+			menuStrip1.Enabled = true;
 		}
 
 		void helpClosed(object sender, FormClosedEventArgs e)
 		{
 			help_Already_Opened = false;
+			menuStrip1.Enabled = true;
 		}
 
 		void monitorClosed(object sender, FormClosedEventArgs e)
 		{
 			monitoring_Already_Opened = false;
+			menuStrip1.Enabled = true;
 		}
 
 

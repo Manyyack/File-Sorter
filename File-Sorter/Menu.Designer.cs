@@ -44,6 +44,7 @@
             this.toolToolStripMenuItem,
             this.aboutToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+			this.menuStrip1.MdiWindowListItem = this.toolToolStripMenuItem;
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(684, 24);
 			this.menuStrip1.TabIndex = 14;
@@ -60,7 +61,7 @@
 			// monitoringToolStripMenuItem
 			// 
 			this.monitoringToolStripMenuItem.Name = "monitoringToolStripMenuItem";
-			this.monitoringToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.monitoringToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
 			this.monitoringToolStripMenuItem.Text = "Monitoring";
 			this.monitoringToolStripMenuItem.Click += new System.EventHandler(this.monitoringToolStripMenuItem_Click);
 			// 
