@@ -3,17 +3,23 @@ using System.Windows.Forms;
 using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace File_Sorter
 {
 	public partial class Form1 : Form
 	{
-		String D_Path;
+		string D_Path;
 		string folder_Opener;
+
+		public delegate void organizeDelegate(string path_to_dir, bool user_message, bool give_Record);
+		public organizeDelegate OrganizeDel;
 
 		public Form1()
 		{
 			InitializeComponent();
+			
+
 		}
 
 		private void Connect_Click(object sender, EventArgs e)
@@ -23,190 +29,213 @@ namespace File_Sorter
 
 		public void changeDirectoryAndOrganize(string path_to_dir, bool user_message, bool give_Record)
 		{
-			Button_Panel.Visible = false;
-			Button_Box.Visible = false;
+			if (InvokeRequired)																    //this whole part is to bring the control to the main thread from the worker thread.. IMP
+			{																			    //this whole part is to bring the control to the main thread from the worker thread.. IMP
+				object[] arr = new object[3];													    //this whole part is to bring the control to the main thread from the worker thread.. IMP
+				arr[0] = path_to_dir;														    //this whole part is to bring the control to the main thread from the worker thread.. IMP
+				arr[1] = user_message;														    //this whole part is to bring the control to the main thread from the worker thread.. IMP
+				arr[2] = give_Record;														    //this whole part is to bring the control to the main thread from the worker thread.. IMP
+				this.OrganizeDel += new organizeDelegate(changeDirectoryAndOrganize);					    //this whole part is to bring the control to the main thread from the worker thread.. IMP
+				Invoke(OrganizeDel,arr);														    //this whole part is to bring the control to the main thread from the worker thread.. IMP
+			}																			    //this whole part is to bring the control to the main thread from the worker thread.. IMP
+			else
+			{
+				Button_Panel.Visible = false;
+				Button_Box.Visible = false;
 
-			try
-			{
-				Directory.SetCurrentDirectory(path_to_dir);
-			}
-			catch (ArgumentException)
-			{
-				MessageBox.Show("Enter the Valid Path.");
-				return;
-			}
-			catch (DirectoryNotFoundException)
-			{
-				MessageBox.Show("No directory found!");
-				return;
-			}
-
-			string[] fileEntries = Directory.GetFiles(Directory.GetCurrentDirectory());
-
-			if (fileEntries.Length == 0)
-			{
-				if (user_message == true)
+				try
 				{
-					MessageBox.Show("No Files present");
+					Directory.SetCurrentDirectory(path_to_dir);
 				}
-				return;
-			}
-
-			string[] exclude_List = Exclude_List.Text.Split(';');
-
-			List<String> File_Types = new List<string>();
-			List<int> F_count = new List<int>();
-
-			File_Types.Capacity = 0;
-			F_count.Capacity = 0;
-
-			foreach (string fileName in fileEntries)
-			{
-				bool do_Not_Move_F = false;
-
-				var f_Pos = fileName.LastIndexOf('.');
-				string f_Type = fileName.Substring(f_Pos + 1).ToUpper();
-
-				if (Exclude.Checked == true)
+				catch (ArgumentException)
 				{
-					foreach (string list in exclude_List)
+					MessageBox.Show("Enter the Valid Path.");
+					return;
+				}
+				catch (DirectoryNotFoundException)
+				{
+					MessageBox.Show("No directory found!");
+					return;
+				}
+
+				string[] fileEntries = Directory.GetFiles(Directory.GetCurrentDirectory());
+
+				if (fileEntries.Length == 0)
+				{
+					if (user_message == true)
 					{
-						if (list.ToUpper() == f_Type)
+						MessageBox.Show("No Files present");
+					}
+					return;
+				}
+
+				string[] exclude_List = Exclude_List.Text.Split(';');
+
+				List<String> File_Types = new List<string>();
+				List<int> F_count = new List<int>();
+
+				File_Types.Capacity = 0;
+				F_count.Capacity = 0;
+
+				foreach (string fileName in fileEntries)
+				{
+					bool do_Not_Move_F = false;
+
+					var f_Pos = fileName.LastIndexOf('.');
+					string f_Type = fileName.Substring(f_Pos + 1).ToUpper();
+
+					if (Exclude.Checked == true)
+					{
+						foreach (string list in exclude_List)
 						{
-							do_Not_Move_F = true;
-							break;
+							if (list.ToUpper() == f_Type)
+							{
+								do_Not_Move_F = true;
+								break;
+							}
+						}
+					}
+
+					if (do_Not_Move_F != true)
+					{
+						if (Directory.Exists(path_to_dir + "\\" + f_Type) == false)
+						{
+							Directory.CreateDirectory(path_to_dir + "\\" + f_Type);
+						}
+
+						if (give_Record == true)
+						{
+							if (File_Types.Contains(f_Type) == false)
+							{
+								File_Types.Add(f_Type);
+								F_count.Add(1);
+							}
+							else
+							{
+								var indexer = File_Types.IndexOf(f_Type);
+								F_count[indexer]++;
+							}
+						}
+
+						Console.WriteLine(fileName);
+						Console.WriteLine(fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));
+
+						try
+						{
+							Directory.Move(fileName, fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));
+						}
+						catch
+						{
+
 						}
 					}
 				}
 
-				if (do_Not_Move_F != true)
+				if (user_message == true)
 				{
-					if (Directory.Exists(path_to_dir + "\\" + f_Type) == false)
-					{
-						Directory.CreateDirectory(path_to_dir + "\\" + f_Type);
-					}
+					MessageBox.Show("Your Folder has been organized!");
 
-					if (give_Record == true)
+				}
+				else
+				{
+					folder_Opener = path_to_dir;
+					NotifyIcon notifier = new NotifyIcon();
+					notifier.Icon = new Icon(Application.StartupPath + @"\icon.ico");
+					notifier.BalloonTipTitle = "Folder Organized";
+					notifier.BalloonTipText = "Click to open the folder";
+					notifier.Text = "Open Folder";
+					notifier.Visible = true;
+					notifier.ShowBalloonTip(5000);
+					notifier.BalloonTipClicked += new EventHandler(Notifier_BalloonTipClicked);
+					notifier.BalloonTipClosed += new EventHandler(Notifier_BalloonTipClosed);
+				}
+
+				if (user_message == true)
+				{
+					Button[] folder_Open = new Button[File_Types.Count];
+					Label[] file_info = new Label[File_Types.Count];
+					ToolTip button_info = new ToolTip();
+
+					button_info.AutoPopDelay = 5000;
+					button_info.InitialDelay = 500;
+					button_info.ReshowDelay = 500;
+					button_info.ShowAlways = true;
+
+					Button_Panel.Visible = true;
+					Button_Box.Visible = true;
+
+					int X_Start = 10;
+					int Y_Start = 20;
+					int Button_Offset_Frm_Label = 10;
+					int Offset_Bwtn_Button = 10;
+					int Group_Box_Offset = 10;
+
+					foreach (string thistypes in File_Types)
 					{
-						if (File_Types.Contains(f_Type) == false)
+						int indexer = File_Types.IndexOf(thistypes);
+						folder_Open[indexer] = new Button();
+						file_info[indexer] = new Label();
+
+						file_info[indexer].Text = F_count[indexer].ToString() + " ." + thistypes.ToLower() + " File";
+						if (F_count[indexer] > 1)
 						{
-							File_Types.Add(f_Type);
-							F_count.Add(1);
+							file_info[indexer].Text += "s";
+						}
+
+						file_info[indexer].ForeColor = label1.ForeColor;
+
+						folder_Open[indexer].Width = Organize.Width;
+						folder_Open[indexer].Height = Organize.Height;
+						folder_Open[indexer].BackColor = Organize.BackColor;
+						folder_Open[indexer].ForeColor = Organize.ForeColor;
+						folder_Open[indexer].Text = "Open " + thistypes.ToUpper();
+						folder_Open[indexer].Click += new EventHandler(openFolder);
+
+						button_info.SetToolTip(folder_Open[indexer], "Click to open " + thistypes + " files");
+
+						if (indexer == 0)
+						{
+							file_info[indexer].Location = new System.Drawing.Point(X_Start, Y_Start);
+							folder_Open[indexer].Location = new System.Drawing.Point(file_info[indexer].Width + Button_Offset_Frm_Label, file_info[indexer].Location.Y);
 						}
 						else
 						{
-							var indexer = File_Types.IndexOf(f_Type);
-							F_count[indexer]++;
+							folder_Open[indexer].Location = new System.Drawing.Point(folder_Open[indexer - 1].Location.X, folder_Open[indexer - 1].Location.Y + Offset_Bwtn_Button + folder_Open[indexer - 1].Height);
+							file_info[indexer].Location = new System.Drawing.Point(file_info[indexer - 1].Location.X, folder_Open[indexer].Location.Y);
 						}
+
+						Button_Box.Height = folder_Open[indexer].Height + folder_Open[indexer].Location.Y + Group_Box_Offset;
+						Button_Box.Width = folder_Open[indexer].Width + folder_Open[indexer].Location.X + Group_Box_Offset;
+						Button_Box.Controls.Add(file_info[indexer]);
+						Button_Box.Controls.Add(folder_Open[indexer]);
+
+						//Console.WriteLine("Files operated of " + thistypes + " are " + F_count[indexer].ToString());
 					}
 
-					Console.WriteLine(fileName);
-					Console.WriteLine(fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));
-
-					try
-					{
-						Directory.Move(fileName, fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));
-					}
-					catch
-					{
-
-					}
+					Button_Panel.Width = Button_Box.Width + 25;
+					//Button_Box.Visible = true;
 				}
 			}
-
-			if (user_message == true)
-			{
-				MessageBox.Show("Your Folder has been organized!");
-			}
-			else
-			{
-				NotifyIcon notifier = new NotifyIcon();
-				notifier.Icon = new System.Drawing.Icon(Application.StartupPath + @"\icon.ico");
-				notifier.BalloonTipTitle = "Folder Organized";
-				notifier.BalloonTipText = "Click to open the folder";
-				notifier.Text = "Open Folder";
-				notifier.Visible = true;
-				notifier.ShowBalloonTip(5000);
-				notifier.BalloonTipClicked += Notifier_BalloonTipClicked;
-				notifier.BalloonTipClosed += Notifier_BalloonTipClosed;
-				notifier.MouseClick += Notifier_MouseClick;
-				notifier.MouseDoubleClick += Notifier_MouseClick;
-				folder_Opener = path_to_dir;	
-			}
-
-			if (user_message == true)
-			{
-				Button[] folder_Open = new Button[File_Types.Count];
-				Label[] file_info = new Label[File_Types.Count];
-				ToolTip button_info = new ToolTip();
-
-				button_info.AutoPopDelay = 5000;
-				button_info.InitialDelay = 500;
-				button_info.ReshowDelay = 500;
-				button_info.ShowAlways = true;
-
-				Button_Panel.Visible = true;
-				Button_Box.Visible = true;
-
-				int X_Start = 10;
-				int Y_Start = 20;
-				int Button_Offset_Frm_Label = 10;
-				int Offset_Bwtn_Button = 10;
-				int Group_Box_Offset = 10;
-
-				foreach (string thistypes in File_Types)
-				{
-					int indexer = File_Types.IndexOf(thistypes);
-					folder_Open[indexer] = new Button();
-					file_info[indexer] = new Label();
-
-					file_info[indexer].Text = F_count[indexer].ToString() + " ." + thistypes.ToLower() + " File";
-					if (F_count[indexer] > 1)
-					{
-						file_info[indexer].Text += "s";
-					}
-
-					file_info[indexer].ForeColor = label1.ForeColor;
-
-					folder_Open[indexer].Width = Organize.Width;
-					folder_Open[indexer].Height = Organize.Height;
-					folder_Open[indexer].BackColor = Organize.BackColor;
-					folder_Open[indexer].ForeColor = Organize.ForeColor;
-					folder_Open[indexer].Text = "Open " + thistypes.ToUpper();
-					folder_Open[indexer].Click += new EventHandler(openFolder);
-
-					button_info.SetToolTip(folder_Open[indexer], "Click to open " + thistypes + " files");
-
-					if (indexer == 0)
-					{
-						file_info[indexer].Location = new System.Drawing.Point(X_Start, Y_Start);
-						folder_Open[indexer].Location = new System.Drawing.Point(file_info[indexer].Width + Button_Offset_Frm_Label, file_info[indexer].Location.Y);
-					}
-					else
-					{
-						folder_Open[indexer].Location = new System.Drawing.Point(folder_Open[indexer - 1].Location.X, folder_Open[indexer - 1].Location.Y + Offset_Bwtn_Button + folder_Open[indexer - 1].Height);
-						file_info[indexer].Location = new System.Drawing.Point(file_info[indexer - 1].Location.X, folder_Open[indexer].Location.Y);
-					}
-
-					Button_Box.Height = folder_Open[indexer].Height + folder_Open[indexer].Location.Y + Group_Box_Offset;
-					Button_Box.Width = folder_Open[indexer].Width + folder_Open[indexer].Location.X + Group_Box_Offset;
-					Button_Box.Controls.Add(file_info[indexer]);
-					Button_Box.Controls.Add(folder_Open[indexer]);
-
-					//Console.WriteLine("Files operated of " + thistypes + " are " + F_count[indexer].ToString());
-				}
-
-				Button_Panel.Width = Button_Box.Width + 25;
-				//Button_Box.Visible = true;
-			}
+				
 		}
 
-		private void Notifier_MouseClick(object sender, MouseEventArgs e)
+		private void Notifier_MouseDoubleClick(object sender, EventArgs e)
+		{
+			Process.Start(@folder_Opener);
+
+			NotifyIcon notified = sender as NotifyIcon;
+			notified.Visible = false;
+			notified.Icon = null;
+			notified.Dispose();
+		}
+
+		private void Notifier_MouseClick(object sender, EventArgs e)
 		{
 			Process.Start(folder_Opener);
 
 			NotifyIcon notified = sender as NotifyIcon;
 			notified.Visible = false;
+			notified.Icon = null;
 			notified.Dispose();
 		}
 
@@ -219,9 +248,10 @@ namespace File_Sorter
 
 		private void Notifier_BalloonTipClicked(object sender, EventArgs e)
 		{
-			Process.Start(folder_Opener);
+			Process.Start(@folder_Opener);
 
 			NotifyIcon notified = sender as NotifyIcon;
+			notified.Icon = null;
 			notified.Visible = false;
 			notified.Dispose();
 		}
