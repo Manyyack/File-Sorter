@@ -122,7 +122,7 @@
 			this.Button_Box.Size = new System.Drawing.Size(200, 20);
 			this.Button_Box.TabIndex = 0;
 			this.Button_Box.TabStop = false;
-			this.Button_Box.Text = "Folder Information";
+			this.Button_Box.Text = "Organized Folder Information";
 			this.Button_Box.Visible = false;
 			// 
 			// Button_Panel
