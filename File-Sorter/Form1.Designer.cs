@@ -45,7 +45,7 @@
 			// 
 			this.Organize.BackColor = System.Drawing.SystemColors.Control;
 			this.Organize.ForeColor = System.Drawing.SystemColors.MenuText;
-			this.Organize.Location = new System.Drawing.Point(530, 11);
+			this.Organize.Location = new System.Drawing.Point(515, 11);
 			this.Organize.Name = "Organize";
 			this.Organize.Size = new System.Drawing.Size(122, 22);
 			this.Organize.TabIndex = 0;
@@ -60,35 +60,35 @@
 			this.F_Path.BackColor = System.Drawing.Color.White;
 			this.F_Path.DetectUrls = false;
 			this.F_Path.EnableAutoDragDrop = true;
-			this.F_Path.Location = new System.Drawing.Point(45, 12);
+			this.F_Path.Location = new System.Drawing.Point(78, 11);
 			this.F_Path.Multiline = false;
 			this.F_Path.Name = "F_Path";
-			this.F_Path.Size = new System.Drawing.Size(447, 21);
+			this.F_Path.Size = new System.Drawing.Size(372, 21);
 			this.F_Path.TabIndex = 1;
 			this.F_Path.Text = "";
 			this.F_Path.TextChanged += new System.EventHandler(this.F_Path_TextChanged);
 			// 
 			// label1
 			// 
-			this.label1.AutoSize = true;
 			this.label1.Cursor = System.Windows.Forms.Cursors.PanEast;
 			this.label1.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-			this.label1.Location = new System.Drawing.Point(10, 15);
-			this.label1.MaximumSize = new System.Drawing.Size(40, 80);
+			this.label1.Location = new System.Drawing.Point(10, 11);
+			this.label1.MaximumSize = new System.Drawing.Size(80, 80);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(29, 13);
+			this.label1.Size = new System.Drawing.Size(67, 20);
 			this.label1.TabIndex = 2;
-			this.label1.Text = "Path";
+			this.label1.Text = "Folder Path";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// Browse
 			// 
 			this.Browse.BackColor = System.Drawing.Color.Transparent;
 			this.Browse.ForeColor = System.Drawing.SystemColors.InfoText;
-			this.Browse.Location = new System.Drawing.Point(498, 10);
+			this.Browse.Location = new System.Drawing.Point(456, 10);
 			this.Browse.Name = "Browse";
-			this.Browse.Size = new System.Drawing.Size(26, 23);
+			this.Browse.Size = new System.Drawing.Size(53, 23);
 			this.Browse.TabIndex = 3;
-			this.Browse.Text = "...";
+			this.Browse.Text = "Browse";
 			this.Browse.UseVisualStyleBackColor = false;
 			this.Browse.Click += new System.EventHandler(this.Browse_Click);
 			// 
@@ -171,13 +171,13 @@
 
 		private System.Windows.Forms.Button Organize;
 		private System.Windows.Forms.RichTextBox F_Path;
-		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button Browse;
 		private System.Windows.Forms.FolderBrowserDialog FolderBrowser;
 		private System.Windows.Forms.CheckBox Exclude;
 		private System.Windows.Forms.TextBox Exclude_List;
 		private System.Windows.Forms.GroupBox Button_Box;
 		private System.Windows.Forms.Panel Button_Panel;
+		private System.Windows.Forms.Label label1;
 	}
 }
 
