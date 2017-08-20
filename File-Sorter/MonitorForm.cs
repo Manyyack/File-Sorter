@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Timers;
 
 namespace File_Sorter
 {
 	public partial class MonitorForm : Form
 	{
 		string dir_Path1;
+		FileSystemWatcher watcher = new FileSystemWatcher();
+
+		System.Timers.Timer delay = new System.Timers.Timer();
 
 		public MonitorForm()
 		{
@@ -137,16 +133,19 @@ namespace File_Sorter
 		{
 			dir_Path1 = Folder_Path1.Text;
 
-			FileSystemWatcher watcher = new FileSystemWatcher(dir_Path1);
+			watcher.Path = dir_Path1;
 			watcher.NotifyFilter = NotifyFilters.LastWrite;
 			watcher.Filter = "*.*";
 			watcher.Changed += new FileSystemEventHandler(fileChanged);
 			watcher.EnableRaisingEvents = true;
 		}
 
-		void fileChanged(object sender,EventArgs e)
+		void fileChanged(object sender,FileSystemEventArgs e)
 		{
-			Console.WriteLine(sender.ToString());
+			if(Directory.Exists(e.FullPath) == true)
+			{
+				return;
+			}
 			try
 			{
 				Directory.SetCurrentDirectory(dir_Path1);
@@ -169,8 +168,25 @@ namespace File_Sorter
 				return;
 			}
 
+			watcher.EnableRaisingEvents = false;
+
+			delay.Interval = 2000;
+			delay.Elapsed += Delay_Elapsed;
+			delay.Enabled = true;
+			delay.Start();
+			
+		}
+
+		private void Delay_Elapsed(object sender, ElapsedEventArgs e)
+		{
+			delay.Stop();
 			var open_Form = Application.OpenForms.OfType<Form1>().Single();
 			open_Form.changeDirectoryAndOrganize(dir_Path1, false, false);
+		}
+
+		public void enableWatcher()
+		{
+			watcher.EnableRaisingEvents = true;
 		}
 
 		//private void Notifier_MouseDoubleClick(object sender, EventArgs e)
