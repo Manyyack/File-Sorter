@@ -2,7 +2,7 @@
 
 A windows application that can organise your folders for you and carefully place the files into a folder created by it's type. Gives you information regarding the number of files it's organized into a specific folder and directly let's you open the folder from the application itself. 
 
-###FEATURES:
+### FEATURES:
 
 - Organised the folder based on filetypes.
 - Can exclude provided filetypes.
