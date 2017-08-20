@@ -50,6 +50,8 @@
 			this.label5 = new System.Windows.Forms.Label();
 			this.Folder_Path5 = new System.Windows.Forms.RichTextBox();
 			this.Browser = new System.Windows.Forms.FolderBrowserDialog();
+			this.watcher = new System.IO.FileSystemWatcher();
+			((System.ComponentModel.ISupportInitialize)(this.watcher)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// exit_Help
@@ -300,6 +302,10 @@
 			this.Folder_Path5.TabIndex = 26;
 			this.Folder_Path5.Text = "";
 			// 
+			// watcher
+			// 
+			this.watcher.SynchronizingObject = this;
+			// 
 			// MonitorForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -331,6 +337,7 @@
 			this.Name = "MonitorForm";
 			this.Text = "Browse";
 			this.Load += new System.EventHandler(this.MonitorForm_Load);
+			((System.ComponentModel.ISupportInitialize)(this.watcher)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -358,5 +365,6 @@
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.RichTextBox Folder_Path5;
 		private System.Windows.Forms.FolderBrowserDialog Browser;
+		private System.IO.FileSystemWatcher watcher;
 	}
 }

@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace File_Sorter
@@ -137,15 +130,27 @@ namespace File_Sorter
 		{
 			dir_Path1 = Folder_Path1.Text;
 
-			FileSystemWatcher watcher = new FileSystemWatcher(dir_Path1);
+			watcher.Path = dir_Path1;
 			watcher.NotifyFilter = NotifyFilters.LastWrite;
 			watcher.Filter = "*.*";
 			watcher.Changed += new FileSystemEventHandler(fileChanged);
 			watcher.EnableRaisingEvents = true;
 		}
 
-		void fileChanged(object sender,EventArgs e)
+		void fileChanged(object sender,FileSystemEventArgs e)
 		{
+			watcher.EnableRaisingEvents = false;
+
+			System.Windows.Forms.Timer delay = new System.Windows.Forms.Timer();
+			delay.Tick += Delay_Tick;
+			delay.Interval = 2000;
+			delay.Start();	
+
+			if (Directory.Exists(e.FullPath) == true)
+			{															 
+				return;
+			}
+
 			Console.WriteLine(sender.ToString());
 			try
 			{
@@ -173,41 +178,11 @@ namespace File_Sorter
 			open_Form.changeDirectoryAndOrganize(dir_Path1, false, false);
 		}
 
-		//private void Notifier_MouseDoubleClick(object sender, EventArgs e)
-		//{
-		//	Process.Start(@folder_Opener);
-
-		//	NotifyIcon notified = sender as NotifyIcon;
-		//	notified.Visible = false;
-		//	notified.Icon = null;
-		//	notified.Dispose();
-		//}
-
-		//private void Notifier_MouseClick(object sender, EventArgs e)
-		//{
-		//	Process.Start(folder_Opener);
-
-		//	NotifyIcon notified = sender as NotifyIcon;
-		//	notified.Visible = false;
-		//	notified.Icon = null;
-		//	notified.Dispose();
-		//}
-
-		//private void Notifier_BalloonTipClosed(object sender, EventArgs e)
-		//{
-		//	NotifyIcon notified = sender as NotifyIcon;
-		//	notified.Visible = false;
-		//	notified.Dispose();
-		//}
-
-		//private void Notifier_BalloonTipClicked(object sender, EventArgs e)
-		//{
-		//	Process.Start(@folder_Opener);
-
-		//	NotifyIcon notified = sender as NotifyIcon;
-		//	notified.Icon = null;
-		//	notified.Visible = false;
-		//	notified.Dispose();
-		//}
+		private void Delay_Tick(object sender, EventArgs e)
+		{
+			System.Windows.Forms.Timer delay_Handler = sender as System.Windows.Forms.Timer;
+			delay_Handler.Stop();
+			watcher.EnableRaisingEvents = true;
+		} 
 	}
 }							 
