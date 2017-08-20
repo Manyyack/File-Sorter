@@ -4,6 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 
 namespace File_Sorter
 {
@@ -14,12 +15,11 @@ namespace File_Sorter
 
 		public delegate void organizeDelegate(string path_to_dir, bool user_message, bool give_Record);
 		public organizeDelegate OrganizeDel;
+		NotifyIcon notifier = new NotifyIcon();
 
 		public Form1()
 		{
 			InitializeComponent();
-			
-
 		}
 
 		private void Connect_Click(object sender, EventArgs e)
@@ -139,7 +139,6 @@ namespace File_Sorter
 				else
 				{
 					folder_Opener = path_to_dir;
-					NotifyIcon notifier = new NotifyIcon();
 					notifier.Icon = new Icon(Application.StartupPath + @"\icon.ico");
 					notifier.BalloonTipTitle = "Folder Organized";
 					notifier.BalloonTipText = "Click to open the folder";
@@ -147,7 +146,10 @@ namespace File_Sorter
 					notifier.Visible = true;
 					notifier.ShowBalloonTip(5000);
 					notifier.BalloonTipClicked += new EventHandler(Notifier_BalloonTipClicked);
-					notifier.BalloonTipClosed += new EventHandler(Notifier_BalloonTipClosed);
+
+					var monitoring = Application.OpenForms.OfType<MonitorForm>().Single();
+					monitoring.enableWatcher();
+
 				}
 
 				if (user_message == true)
@@ -223,37 +225,28 @@ namespace File_Sorter
 		{
 			Process.Start(@folder_Opener);
 
-			NotifyIcon notified = sender as NotifyIcon;
-			notified.Visible = false;
-			notified.Icon = null;
-			notified.Dispose();
+			notifier.Visible = false;
+			notifier.Icon = null;
+			notifier.Dispose();
 		}
 
 		private void Notifier_MouseClick(object sender, EventArgs e)
 		{
 			Process.Start(folder_Opener);
 
-			NotifyIcon notified = sender as NotifyIcon;
-			notified.Visible = false;
-			notified.Icon = null;
-			notified.Dispose();
-		}
-
-		private void Notifier_BalloonTipClosed(object sender, EventArgs e)
-		{
-			NotifyIcon notified = sender as NotifyIcon;
-			notified.Visible = false;
-			notified.Dispose();
+			notifier.Visible = false;
+			notifier.Icon = null;
+			notifier.Dispose();
 		}
 
 		private void Notifier_BalloonTipClicked(object sender, EventArgs e)
 		{
 			Process.Start(@folder_Opener);
 
-			NotifyIcon notified = sender as NotifyIcon;
-			notified.Icon = null;
-			notified.Visible = false;
-			notified.Dispose();
+			
+			notifier.Icon = null;
+			notifier.Visible = false;
+			notifier.Dispose();
 		}
 
 		void openFolder(object sender, EventArgs e)
