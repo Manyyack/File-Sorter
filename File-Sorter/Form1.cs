@@ -122,12 +122,14 @@ namespace File_Sorter
 
 						try
 						{
+							FileStream stream = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.None);
+							stream.Close();
 							Directory.Move(fileName, fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));
 						}
 						catch
 						{
-
-						}
+							
+						}	
 					}
 				}
 
