@@ -28,7 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 			this.Organize = new System.Windows.Forms.Button();
 			this.F_Path = new System.Windows.Forms.RichTextBox();
 			this.label1 = new System.Windows.Forms.Label();
@@ -154,7 +153,6 @@
 			this.ForeColor = System.Drawing.SystemColors.Menu;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.HelpButton = true;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimizeBox = false;
 			this.Name = "Form1";
 			this.ShowIcon = false;
@@ -170,7 +168,6 @@
 		#endregion
 
 		private System.Windows.Forms.Button Organize;
-		private System.Windows.Forms.RichTextBox F_Path;
 		private System.Windows.Forms.Button Browse;
 		private System.Windows.Forms.FolderBrowserDialog FolderBrowser;
 		private System.Windows.Forms.CheckBox Exclude;
@@ -178,6 +175,7 @@
 		private System.Windows.Forms.GroupBox Button_Box;
 		private System.Windows.Forms.Panel Button_Panel;
 		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.RichTextBox F_Path;
 	}
 }
 
