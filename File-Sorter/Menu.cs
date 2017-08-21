@@ -25,11 +25,20 @@ namespace File_Sorter
 			InitializeComponent();
 
 			this.MaximizeBox = false;
+			this.Resize += Menu_Resize;
 			
 			sorter.MdiParent = this;
 			sorter.Dock = DockStyle.Fill;
 			sorter.WindowState = FormWindowState.Normal;
 			sorter.Show();
+		}
+
+		private void Menu_Resize(object sender, EventArgs e)
+		{
+			if(this.WindowState == FormWindowState.Minimized)
+			{
+				
+			}
 		}
 
 		private void viewHelpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -98,7 +107,5 @@ namespace File_Sorter
 			monitoring_Already_Opened = false;
 			menuStrip1.Enabled = true;
 		}
-
-
 	}
 }

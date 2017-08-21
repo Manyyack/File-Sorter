@@ -99,6 +99,7 @@
 			this.Name = "Menu";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "File Sorter";
+			this.Load += new System.EventHandler(this.Menu_Load);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.ResumeLayout(false);
