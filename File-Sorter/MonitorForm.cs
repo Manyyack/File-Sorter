@@ -196,42 +196,5 @@ namespace File_Sorter
 		{
 			watcher.EnableRaisingEvents = true;
 		}
-
-		//private void Notifier_MouseDoubleClick(object sender, EventArgs e)
-		//{
-		//	Process.Start(@folder_Opener);
-
-		//	NotifyIcon notified = sender as NotifyIcon;
-		//	notified.Visible = false;
-		//	notified.Icon = null;
-		//	notified.Dispose();
-		//}
-
-		//private void Notifier_MouseClick(object sender, EventArgs e)
-		//{
-		//	Process.Start(folder_Opener);
-
-		//	NotifyIcon notified = sender as NotifyIcon;
-		//	notified.Visible = false;
-		//	notified.Icon = null;
-		//	notified.Dispose();
-		//}
-
-		//private void Notifier_BalloonTipClosed(object sender, EventArgs e)
-		//{
-		//	NotifyIcon notified = sender as NotifyIcon;
-		//	notified.Visible = false;
-		//	notified.Dispose();
-		//}
-
-		//private void Notifier_BalloonTipClicked(object sender, EventArgs e)
-		//{
-		//	Process.Start(@folder_Opener);
-
-		//	NotifyIcon notified = sender as NotifyIcon;
-		//	notified.Icon = null;
-		//	notified.Visible = false;
-		//	notified.Dispose();
-		//}
 	}
 }							 
