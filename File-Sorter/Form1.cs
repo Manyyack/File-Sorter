@@ -103,32 +103,34 @@ namespace File_Sorter
 							Directory.CreateDirectory(path_to_dir + "\\" + f_Type);
 						}
 
-						if (give_Record == true)
-						{
-							if (File_Types.Contains(f_Type) == false)
-							{
-								File_Types.Add(f_Type);
-								F_count.Add(1);
-							}
-							else
-							{
-								var indexer = File_Types.IndexOf(f_Type);
-								F_count[indexer]++;
-							}
-						}
-
-						Console.WriteLine(fileName);
-						Console.WriteLine(fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));
+						//Console.WriteLine(fileName);
+						//Console.WriteLine(fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));
 
 						try
 						{
 							FileStream stream = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.None);
 							stream.Close();
 							Directory.Move(fileName, fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));
+							if (give_Record == true)
+							{
+								if (File_Types.Contains(f_Type) == false)
+								{
+									File_Types.Add(f_Type);
+									F_count.Add(1);
+								}
+								else
+								{
+									var indexer = File_Types.IndexOf(f_Type);
+									F_count[indexer]++;
+								}
+							}
 						}
-						catch
+						catch(IOException)
 						{
-							
+							if(user_message == true)
+							{
+								MessageBox.Show(fileName + " is currently being accessed by another process.");
+							}
 						}	
 					}
 				}
