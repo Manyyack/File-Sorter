@@ -12,6 +12,9 @@ namespace File_Sorter
 {
 	public partial class Menu : Form
 	{
+		MonitorForm monitoring = new MonitorForm();
+		Form sorter = new Form1();
+		HelpForm help = new HelpForm();
 
 		bool about_Form_Already_Opened = false;
 		bool help_Already_Opened = false;
@@ -20,8 +23,9 @@ namespace File_Sorter
 		public Menu()
 		{
 			InitializeComponent();
+
 			this.MaximizeBox = false;
-			Form sorter = new Form1();
+			
 			sorter.MdiParent = this;
 			sorter.Dock = DockStyle.Fill;
 			sorter.WindowState = FormWindowState.Normal;
@@ -33,7 +37,7 @@ namespace File_Sorter
 			//link to mohit's video.
 			if (help_Already_Opened == false)
 			{
-				HelpForm help = new HelpForm();
+				
 				help.FormClosed += new FormClosedEventHandler(helpClosed);
 				help.MdiParent = this;
 				help.Dock = DockStyle.Fill;
@@ -63,7 +67,6 @@ namespace File_Sorter
 		{
 			if (monitoring_Already_Opened == false)
 			{
-				MonitorForm monitoring = new MonitorForm();
 				monitoring.FormClosed += new FormClosedEventHandler(monitorClosed);
 				monitoring.MdiParent = this;
 				monitoring.Dock = DockStyle.Fill;
@@ -71,6 +74,10 @@ namespace File_Sorter
 				monitoring_Already_Opened = true;
 				monitoring.Show();
 				menuStrip1.Enabled = false;
+			}
+			else
+			{
+				monitoring.Show();
 			}
 		}
 
