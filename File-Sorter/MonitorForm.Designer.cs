@@ -61,7 +61,7 @@
 			this.exit_Help.TabIndex = 2;
 			this.exit_Help.Text = "Exit";
 			this.exit_Help.UseVisualStyleBackColor = true;
-			this.exit_Help.Click += new System.EventHandler(this.exit_Help_Click);
+			this.exit_Help.Click += new System.EventHandler(this.exit_Monitor_Click);
 			// 
 			// bt_Browse1
 			// 

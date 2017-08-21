@@ -18,9 +18,17 @@ namespace File_Sorter
 			InitializeComponent();
 		}
 
-		private void exit_Help_Click(object sender, EventArgs e)
+		private void exit_Monitor_Click(object sender, EventArgs e)
 		{
-			Close();
+			if (cb_Monitor1.Checked == true)
+			{
+				Application.OpenForms.OfType<Menu>().Single().menuStrip1.Enabled = true;
+				Hide();
+			}
+			else
+			{
+				Close();
+			}
 		}
 
 		private void MonitorForm_Load(object sender, EventArgs e)
