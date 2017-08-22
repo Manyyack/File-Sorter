@@ -15,11 +15,61 @@ namespace File_Sorter
 
 		public delegate void organizeDelegate(string path_to_dir, bool user_message, bool give_Record);
 		public organizeDelegate OrganizeDel;
+
 		NotifyIcon notifier = new NotifyIcon();
+
+		FileSystemWatcher watcher1 = new FileSystemWatcher();
+		bool file_Being_Watched1;
+
+		FileSystemWatcher watcher2 = new FileSystemWatcher();
+		FileSystemWatcher watcher3 = new FileSystemWatcher();
+		FileSystemWatcher watcher4 = new FileSystemWatcher();
+		FileSystemWatcher watcher5 = new FileSystemWatcher();
+
 
 		public Form1()
 		{
 			InitializeComponent();
+
+			watcher1.NotifyFilter = NotifyFilters.LastWrite;
+			watcher1.Filter = "*.*";
+			watcher1.Changed += new FileSystemEventHandler(fileChanged1);
+
+
+		}
+
+		private void Form1_Load(object sender, EventArgs e)
+		{
+			ToolTip tooltip1 = new ToolTip();
+
+			tooltip1.AutoPopDelay = 5000;
+			tooltip1.InitialDelay = 500;
+			tooltip1.ReshowDelay = 500;
+			tooltip1.ShowAlways = true;
+
+			Timer checker = new Timer();
+			checker.Interval = 5000;
+			checker.Tick += Checker_Tick;
+			checker.Enabled = true;
+
+			tooltip1.SetToolTip(this.F_Path, "Enter the path of the directory which needs sorting of the files");
+			tooltip1.SetToolTip(this.Organize, "Click to sort files");
+			tooltip1.SetToolTip(this.Browse, "Browse the folder");
+			tooltip1.SetToolTip(this.Exclude, "Check to exclude File Types");
+			tooltip1.SetToolTip(this.Exclude_List, "Enter the file types to exclude seperated with ';'");
+		}
+
+		private void Browse_Click(object sender, EventArgs e)
+		{
+			FolderBrowser.ShowDialog();
+			D_Path = FolderBrowser.SelectedPath;
+			F_Path.Text = D_Path;
+			FolderBrowser.Dispose();
+		}
+
+		private void F_Path_TextChanged(object sender, EventArgs e)
+		{
+			D_Path = F_Path.Text;
 		}
 
 		private void Connect_Click(object sender, EventArgs e)
@@ -152,7 +202,7 @@ namespace File_Sorter
 					notifier.BalloonTipClicked += new EventHandler(Notifier_BalloonTipClicked);
 
 					var monitoring = Application.OpenForms.OfType<MonitorForm>().Single();
-					monitoring.enableWatcher();
+					//monitoring.enableWatcher();
 
 				}
 
@@ -225,6 +275,18 @@ namespace File_Sorter
 				
 		}
 
+		void openFolder(object sender, EventArgs e)
+		{
+			//Console.WriteLine(sender.ToString());
+			var temp = sender.ToString().LastIndexOf(' ');
+			string folder_Name = sender.ToString().Substring(temp + 1);
+			string path_to_folder = D_Path + "\\" + folder_Name;
+			//Console.WriteLine(folder_Name);
+			//Console.WriteLine(path_to_folder);
+			Process.Start(@path_to_folder);
+
+		}
+		
 		private void Notifier_MouseDoubleClick(object sender, EventArgs e)
 		{
 			Process.Start(@folder_Opener);
@@ -253,45 +315,28 @@ namespace File_Sorter
 			notifier.Dispose();
 		}
 
-		void openFolder(object sender, EventArgs e)
-		{
-			//Console.WriteLine(sender.ToString());
-			var temp = sender.ToString().LastIndexOf(' ');
-			string folder_Name = sender.ToString().Substring(temp + 1);
-			string path_to_folder = D_Path + "\\" + folder_Name;
-			//Console.WriteLine(folder_Name);
-			//Console.WriteLine(path_to_folder);
-			Process.Start(@path_to_folder);
+		
 
+		
+
+		
+
+		private void Checker_Tick(object sender, EventArgs e)
+		{
+			if(Properties.Settings.Default.monitoring1 == true && Properties.Settings.Default.dir1 != "" && file_Being_Watched1 != true)
+			{
+				watcher1.Path = Properties.Settings.Default.dir1;
+				watcher1.EnableRaisingEvents = true;
+			}
+			else
+			{
+				watcher1.EnableRaisingEvents = false;
+			}	
 		}
 
-		private void F_Path_TextChanged(object sender, EventArgs e)
+		void fileChanged1(object sender, FileSystemEventArgs e)
 		{
-			D_Path = F_Path.Text;
+			changeDirectoryAndOrganize(Properties.Settings.Default.dir1, false, false);
 		}
-
-		private void Form1_Load(object sender, EventArgs e)
-		{
-			ToolTip tooltip1 = new ToolTip();
-
-			tooltip1.AutoPopDelay = 5000;
-			tooltip1.InitialDelay = 500;
-			tooltip1.ReshowDelay = 500;
-			tooltip1.ShowAlways = true;
-
-			tooltip1.SetToolTip(this.F_Path, "Enter the path of the directory which needs sorting of the files");
-			tooltip1.SetToolTip(this.Organize, "Click to sort files");
-			tooltip1.SetToolTip(this.Browse, "Browse the folder");
-			tooltip1.SetToolTip(this.Exclude, "Check to exclude File Types");
-			tooltip1.SetToolTip(this.Exclude_List, "Enter the file types to exclude seperated with ';'");
-		}
-
-		private void Browse_Click(object sender, EventArgs e)
-		{
-			FolderBrowser.ShowDialog();
-			D_Path = FolderBrowser.SelectedPath;
-			F_Path.Text = D_Path;
-			FolderBrowser.Dispose();
-		}	
 	}
 }

@@ -8,11 +8,6 @@ namespace File_Sorter
 {
 	public partial class MonitorForm : Form
 	{
-		string dir_Path1;
-		FileSystemWatcher watcher = new FileSystemWatcher();
-
-		System.Timers.Timer delay = new System.Timers.Timer();
-
 		public MonitorForm()
 		{
 			InitializeComponent();
@@ -20,15 +15,7 @@ namespace File_Sorter
 
 		private void exit_Monitor_Click(object sender, EventArgs e)
 		{
-			if (cb_Monitor1.Checked == true)
-			{
-				Application.OpenForms.OfType<Menu>().Single().menuStrip1.Enabled = true;
-				Hide();
-			}
-			else
-			{
-				Close();
-			}
+			Close();
 		}
 
 		private void MonitorForm_Load(object sender, EventArgs e)
@@ -64,11 +51,15 @@ namespace File_Sorter
 			{
 				Folder_Path1.Enabled = true;
 				bt_Browse1.Enabled = true;
+				Properties.Settings.Default.monitoring1 = true;
+				Properties.Settings.Default.Save();
 			}
 			else
 			{
 				Folder_Path1.Enabled = false;
 				bt_Browse1.Enabled = false;
+				Properties.Settings.Default.monitoring1 = false;
+				Properties.Settings.Default.Save();
 			}
 		}
 
@@ -131,70 +122,15 @@ namespace File_Sorter
 		private void bt_Browse1_Click(object sender, EventArgs e)
 		{
 			Browser.ShowDialog();
-			dir_Path1 = Browser.SelectedPath;
-			Folder_Path1.Text = dir_Path1;
+			Folder_Path1.Text = Browser.SelectedPath;
 			Browser.Dispose();
 			
 		}
 
 		private void Folder_Path1_TextChanged(object sender, EventArgs e)
 		{
-			dir_Path1 = Folder_Path1.Text;
-
-			watcher.Path = dir_Path1;
-			watcher.NotifyFilter = NotifyFilters.LastWrite;
-			watcher.Filter = "*.*";
-			watcher.Changed += new FileSystemEventHandler(fileChanged);
-			watcher.EnableRaisingEvents = true;
-		}
-
-		void fileChanged(object sender,FileSystemEventArgs e)
-		{
-			if(Directory.Exists(e.FullPath) == true)
-			{
-				return;
-			}
-			try
-			{
-				Directory.SetCurrentDirectory(dir_Path1);
-			}
-			catch (ArgumentException)
-			{
-				MessageBox.Show("Enter the Valid Path.");
-				return;
-			}
-			catch (DirectoryNotFoundException)
-			{
-				MessageBox.Show("No directory found!");
-				return;
-			}
-
-			string[] fileEntries = Directory.GetFiles(Directory.GetCurrentDirectory());
-
-			if (fileEntries.Length == 0)
-			{
-				return;
-			}
-
-			watcher.EnableRaisingEvents = false;
-
-			delay.Interval = 2000;
-			delay.Elapsed += Delay_Elapsed;
-			delay.Enabled = true;
-			delay.Start();
-			
-		}
-
-		private void Delay_Elapsed(object sender, ElapsedEventArgs e)
-		{
-			delay.Stop();
-			var open_Form = Application.OpenForms.OfType<Form1>().Single();
-			open_Form.changeDirectoryAndOrganize(dir_Path1, false, false);
-		}
-
-		public void enableWatcher()
-		{
-			watcher.EnableRaisingEvents = true;
+			Properties.Settings.Default.dir1 = Folder_Path1.Text;
+			Properties.Settings.Default.Save();
 		}
 	}
 }							 
