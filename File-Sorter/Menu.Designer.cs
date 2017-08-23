@@ -61,8 +61,8 @@
 			// monitoringToolStripMenuItem
 			// 
 			this.monitoringToolStripMenuItem.Name = "monitoringToolStripMenuItem";
-			this.monitoringToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.monitoringToolStripMenuItem.Text = "Monitoring";
+			this.monitoringToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.monitoringToolStripMenuItem.Text = "Folder Monitor";
 			this.monitoringToolStripMenuItem.Click += new System.EventHandler(this.monitoringToolStripMenuItem_Click);
 			// 
 			// aboutToolStripMenuItem
