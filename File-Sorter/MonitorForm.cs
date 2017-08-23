@@ -20,6 +20,13 @@ namespace File_Sorter
 
 		private void MonitorForm_Load(object sender, EventArgs e)
 		{
+			cb_Monitor1.Checked = Properties.Settings.Default.monitoring1;
+			Folder_Path1.Text = Properties.Settings.Default.dir1;
+			if(cb_Monitor1.Checked == false)
+			{
+				Folder_Path1.Enabled = false;
+				bt_Browse1.Enabled = false;
+			}
 
 			ToolTip monitor_TT = new ToolTip();
 			monitor_TT.AutoPopDelay = 500;
@@ -29,13 +36,13 @@ namespace File_Sorter
 
 			monitor_TT.ShowAlways = true;
 
-			Folder_Path1.Enabled = false;
+			
 			Folder_Path2.Enabled = false;
 			Folder_Path3.Enabled = false;
 			Folder_Path4.Enabled = false;
 			Folder_Path5.Enabled = false;
 
-			bt_Browse1.Enabled = false;
+			
 			bt_Browse2.Enabled = false;
 			bt_Browse3.Enabled = false;
 			bt_Browse4.Enabled = false;
@@ -58,6 +65,7 @@ namespace File_Sorter
 			{
 				Folder_Path1.Enabled = false;
 				bt_Browse1.Enabled = false;
+				Folder_Path1.Text = "";
 				Properties.Settings.Default.monitoring1 = false;
 				Properties.Settings.Default.Save();
 			}
