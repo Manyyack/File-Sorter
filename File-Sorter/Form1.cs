@@ -4,7 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
+using System.Windows.Forms;
 
 namespace File_Sorter
 {
@@ -19,13 +19,12 @@ namespace File_Sorter
 		NotifyIcon notifier = new NotifyIcon();
 
 		FileSystemWatcher watcher1 = new FileSystemWatcher();
-		bool file_Being_Watched1;
-
 		FileSystemWatcher watcher2 = new FileSystemWatcher();
 		FileSystemWatcher watcher3 = new FileSystemWatcher();
 		FileSystemWatcher watcher4 = new FileSystemWatcher();
 		FileSystemWatcher watcher5 = new FileSystemWatcher();
 
+		System.Timers.Timer delay = new System.Timers.Timer();
 
 		public Form1()
 		{
@@ -34,6 +33,8 @@ namespace File_Sorter
 			watcher1.NotifyFilter = NotifyFilters.LastWrite;
 			watcher1.Filter = "*.*";
 			watcher1.Changed += new FileSystemEventHandler(fileChanged1);
+
+			Properties.Settings.Default.PropertyChanged += Default_PropertyChanged;
 
 
 		}
@@ -46,11 +47,6 @@ namespace File_Sorter
 			tooltip1.InitialDelay = 500;
 			tooltip1.ReshowDelay = 500;
 			tooltip1.ShowAlways = true;
-
-			Timer checker = new Timer();
-			checker.Interval = 5000;
-			checker.Tick += Checker_Tick;
-			checker.Enabled = true;
 
 			tooltip1.SetToolTip(this.F_Path, "Enter the path of the directory which needs sorting of the files");
 			tooltip1.SetToolTip(this.Organize, "Click to sort files");
@@ -93,18 +89,8 @@ namespace File_Sorter
 				Button_Panel.Visible = false;
 				Button_Box.Visible = false;
 
-				try
+				if (checkForDirectory(path_to_dir) == false)
 				{
-					Directory.SetCurrentDirectory(path_to_dir);
-				}
-				catch (ArgumentException)
-				{
-					MessageBox.Show("Enter the Valid Path.");
-					return;
-				}
-				catch (DirectoryNotFoundException)
-				{
-					MessageBox.Show("No directory found!");
 					return;
 				}
 
@@ -200,10 +186,6 @@ namespace File_Sorter
 					notifier.Visible = true;
 					notifier.ShowBalloonTip(5000);
 					notifier.BalloonTipClicked += new EventHandler(Notifier_BalloonTipClicked);
-
-					var monitoring = Application.OpenForms.OfType<MonitorForm>().Single();
-					//monitoring.enableWatcher();
-
 				}
 
 				if (user_message == true)
@@ -252,7 +234,7 @@ namespace File_Sorter
 						if (indexer == 0)
 						{
 							file_info[indexer].Location = new System.Drawing.Point(X_Start, Y_Start);
-							folder_Open[indexer].Location = new System.Drawing.Point(file_info[indexer].Width + Button_Offset_Frm_Label, file_info[indexer].Location.Y);
+							folder_Open[indexer].Location = new Point(file_info[indexer].Width + Button_Offset_Frm_Label, file_info[indexer].Location.Y);
 						}
 						else
 						{
@@ -315,28 +297,69 @@ namespace File_Sorter
 			notifier.Dispose();
 		}
 
-		
-
-		
-
-		
-
-		private void Checker_Tick(object sender, EventArgs e)
+		private void Default_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
-			if(Properties.Settings.Default.monitoring1 == true && Properties.Settings.Default.dir1 != "" && file_Being_Watched1 != true)
+			if (Properties.Settings.Default.monitoring1 == true && Properties.Settings.Default.dir1 != "")
 			{
 				watcher1.Path = Properties.Settings.Default.dir1;
-				watcher1.EnableRaisingEvents = true;
+
+				if (checkForDirectory(watcher1.Path) == true)
+				{
+					watcher1.EnableRaisingEvents = true;
+				}
+				else
+				{
+					watcher1.EnableRaisingEvents = false;
+					return;
+				}
 			}
 			else
 			{
 				watcher1.EnableRaisingEvents = false;
-			}	
+			}
 		}
 
 		void fileChanged1(object sender, FileSystemEventArgs e)
 		{
+			checkForDirectory(watcher1.Path);
+
+			string[] files_present = Directory.GetFiles(Directory.GetCurrentDirectory());
+
+			if (files_present.Length == 0)
+			{
+				return;
+			}
+
+			delay.Interval = 2000;
+			delay.Elapsed += Delay_Tick;
+			delay.Enabled = true;
+			
+		}
+
+		private void Delay_Tick(object sender, EventArgs e)
+		{
+			delay.Enabled = false;
 			changeDirectoryAndOrganize(Properties.Settings.Default.dir1, false, false);
+
+		}
+
+		bool checkForDirectory(string dir_path_temp)
+		{
+			try
+			{
+				Directory.SetCurrentDirectory(dir_path_temp);
+				return true;
+			}
+			catch (ArgumentException)
+			{
+				MessageBox.Show("Enter the Valid Path.");
+				return false;
+			}
+			catch (DirectoryNotFoundException)
+			{
+				MessageBox.Show("No directory found!");
+				return false;
+			}
 		}
 	}
 }
