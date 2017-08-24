@@ -4,7 +4,6 @@ using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Windows.Forms;
 
 namespace File_Sorter
 {
@@ -145,8 +144,15 @@ namespace File_Sorter
 						try
 						{
 							FileStream stream = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.None);
+							FileInfo info = new FileInfo(fileName);
+							MessageBox.Show(stream.Length.ToString() + " " + info.Length.ToString());
 							stream.Close();
-							Directory.Move(fileName, fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));
+
+							if (info.Length != 0)
+							{
+								Directory.Move(fileName, fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));
+							}
+
 							if (give_Record == true)
 							{
 								if (File_Types.Contains(f_Type) == false)
