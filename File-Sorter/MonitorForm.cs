@@ -36,7 +36,19 @@ namespace File_Sorter
 
 			monitor_TT.ShowAlways = true;
 
-			
+			monitor_TT.SetToolTip(cb_Monitor1, "Check to monitor a new folder for organizing");
+			monitor_TT.SetToolTip(cb_Monitor2, "Check to monitor a new folder for organizing");
+			monitor_TT.SetToolTip(cb_Monitor3, "Check to monitor a new folder for organizing");
+			monitor_TT.SetToolTip(cb_Monitor4, "Check to monitor a new folder for organizing");
+			monitor_TT.SetToolTip(cb_Monitor5, "Check to monitor a new folder for organizing");
+
+			monitor_TT.SetToolTip(bt_Browse1, "Browse the folder");
+			monitor_TT.SetToolTip(bt_Browse2, "Browse the folder");
+			monitor_TT.SetToolTip(bt_Browse3, "Browse the folder");
+			monitor_TT.SetToolTip(bt_Browse4, "Browse the folder");
+			monitor_TT.SetToolTip(bt_Browse5, "Browse the folder");
+
+
 			Folder_Path2.Enabled = false;
 			Folder_Path3.Enabled = false;
 			Folder_Path4.Enabled = false;
