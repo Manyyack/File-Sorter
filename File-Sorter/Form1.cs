@@ -9,19 +9,19 @@ namespace File_Sorter
 {
 	public partial class Form1 : Form
 	{
-		string D_Path;
-		string folder_Opener;
+		string D_Path;									//Directory Path
+		string folder_Opener;							//when process uses to open the folder
 
-		public delegate void organizeDelegate(string path_to_dir, bool user_message, bool give_Record);
-		public organizeDelegate OrganizeDel;
+		public delegate void organizeDelegate(string path_to_dir, bool user_message, bool give_Record);  //delegates created to invoke the function on to the main thread
+		public organizeDelegate OrganizeDel;												  //delegates created to invoke the function on to the main thread
 
 		NotifyIcon notifier = new NotifyIcon();
 
-		FileSystemWatcher watcher1 = new FileSystemWatcher();
-		FileSystemWatcher watcher2 = new FileSystemWatcher();
-		FileSystemWatcher watcher3 = new FileSystemWatcher();
-		FileSystemWatcher watcher4 = new FileSystemWatcher();
-		FileSystemWatcher watcher5 = new FileSystemWatcher();
+		FileSystemWatcher watcher1 = new FileSystemWatcher();		//5 filesystem watcher for monitoring
+		FileSystemWatcher watcher2 = new FileSystemWatcher();		//5 filesystem watcher for monitoring
+		FileSystemWatcher watcher3 = new FileSystemWatcher();		//5 filesystem watcher for monitoring
+		FileSystemWatcher watcher4 = new FileSystemWatcher();		//5 filesystem watcher for monitoring
+		FileSystemWatcher watcher5 = new FileSystemWatcher();		//5 filesystem watcher for monitoring
 
 		System.Timers.Timer delay = new System.Timers.Timer();
 
@@ -85,17 +85,17 @@ namespace File_Sorter
 			}																			    //this whole part is to bring the control to the main thread from the worker thread.. IMP
 			else
 			{
-				Button_Panel.Visible = false;
-				Button_Box.Visible = false;
+				Button_Panel.Visible = false;									//make information about previous folders organized disappear
+				Button_Box.Visible = false;									//make information about previous folders organized disappear
 
-				if (checkForDirectory(path_to_dir) == false)
+				if (checkForDirectory(path_to_dir) == false)						//if directory entered is not present, return and exit
 				{
 					return;
 				}
 
 				string[] fileEntries = Directory.GetFiles(Directory.GetCurrentDirectory());
 
-				if (fileEntries.Length == 0)
+				if (fileEntries.Length == 0)									//if no files are present to organize, return and exit
 				{
 					if (user_message == true)
 					{
@@ -104,10 +104,21 @@ namespace File_Sorter
 					return;
 				}
 
-				string[] exclude_List = Exclude_List.Text.Split(';');
+				string[] exclude_List;
 
-				List<String> File_Types = new List<string>();
-				List<int> F_count = new List<int>();
+				if (user_message == true)									//when this particular function is being called from the form1 , take the exclude list as provided
+				{
+					exclude_List = Exclude_List.Text.Split(';');
+				}
+				else														//if the user messages are not going to be provided, hence the function has been called from the monitoring form,
+				{
+					exclude_List = new string[1];						//in that case , take the default files that needs to be excluded for example .part files are generated when downloading using the firefox, hence ignore the file till it is fully downloaded
+					exclude_List[0] = "part";
+				}
+
+
+				List<String> File_Types = new List<string>();				//variable that stores all the file types
+				List<int> F_count = new List<int>();						//variable that stores the counts for the specific file types for all the filetypes
 
 				File_Types.Capacity = 0;
 				F_count.Capacity = 0;
@@ -116,10 +127,10 @@ namespace File_Sorter
 				{
 					bool do_Not_Move_F = false;
 
-					var f_Pos = fileName.LastIndexOf('.');
+					var f_Pos = fileName.LastIndexOf('.');							//search for the last '.' present in the filename , hence we will be left with only extension
 					string f_Type = fileName.Substring(f_Pos + 1).ToUpper();
 
-					if (Exclude.Checked == true)
+					if (Exclude.Checked == true || user_message == false)			    //if exclude is check when running  from the main form or the no user message for monitoring, donot attempt to move the file
 					{
 						foreach (string list in exclude_List)
 						{
@@ -133,9 +144,9 @@ namespace File_Sorter
 
 					if (do_Not_Move_F != true)
 					{
-						if (Directory.Exists(path_to_dir + "\\" + f_Type) == false)
+						if (Directory.Exists(path_to_dir + "\\" + f_Type) == false)		//if directory for the specific extension is not generated before 
 						{
-							Directory.CreateDirectory(path_to_dir + "\\" + f_Type);
+							Directory.CreateDirectory(path_to_dir + "\\" + f_Type);	//generate
 						}
 
 						//Console.WriteLine(fileName);
@@ -143,31 +154,37 @@ namespace File_Sorter
 
 						try
 						{
-							FileStream stream = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.None);
-							FileInfo info = new FileInfo(fileName);
-							MessageBox.Show(stream.Length.ToString() + " " + info.Length.ToString());
-							stream.Close();
+							FileStream stream = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.None);		//open the file to check if other process in the system is accessing the file
+							FileInfo info = new FileInfo(fileName);												//get the information regarding the file
+							stream.Close();																//close the stream to proceed with the smooth operation of the file organizing
 
-							if (info.Length != 0)
+							if (info.Length != 0)							//if file size is not ZERO
 							{
-								Directory.Move(fileName, fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));
+								try
+								{
+									Directory.Move(fileName, fileName.Insert(fileName.LastIndexOf("\\") + 1, f_Type + "\\"));      //ORGANIZE
+								}
+								catch(System.IO.IOException)
+								{
+
+								}
 							}
 
-							if (give_Record == true)
+							if (give_Record == true)										//if the record is needed, that is being run from the main form , generate all the information for creating a record.
 							{
-								if (File_Types.Contains(f_Type) == false)
+								if (File_Types.Contains(f_Type) == false)					//if the file type for record has not been added before, add the file type and set the count to 1;
 								{
 									File_Types.Add(f_Type);
 									F_count.Add(1);
 								}
-								else
+								else												  //other wise simply increment the count
 								{
 									var indexer = File_Types.IndexOf(f_Type);
 									F_count[indexer]++;
 								}
 							}
 						}
-						catch(IOException)
+						catch(IOException)											//if file was being used. OP message
 						{
 							if(user_message == true)
 							{
@@ -177,7 +194,7 @@ namespace File_Sorter
 					}
 				}
 
-				if (user_message == true)
+				if (user_message == true)			//OP Message
 				{
 					MessageBox.Show("Your Folder has been organized!");
 
@@ -259,6 +276,8 @@ namespace File_Sorter
 					Button_Panel.Width = Button_Box.Width + 25;
 					//Button_Box.Visible = true;
 				}
+
+				File_Types.Clear();
 			}
 				
 		}
@@ -281,7 +300,7 @@ namespace File_Sorter
 
 			notifier.Visible = false;
 			notifier.Icon = null;
-			notifier.Dispose();
+			//notifier.Dispose();
 		}
 
 		private void Notifier_MouseClick(object sender, EventArgs e)
@@ -290,7 +309,7 @@ namespace File_Sorter
 
 			notifier.Visible = false;
 			notifier.Icon = null;
-			notifier.Dispose();
+			//notifier.Dispose();
 		}
 
 		private void Notifier_BalloonTipClicked(object sender, EventArgs e)
@@ -300,7 +319,7 @@ namespace File_Sorter
 			
 			notifier.Icon = null;
 			notifier.Visible = false;
-			notifier.Dispose();
+			//notifier.Dispose();
 		}
 
 		private void Default_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
