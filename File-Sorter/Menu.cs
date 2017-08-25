@@ -12,7 +12,7 @@ namespace File_Sorter
 {
 	public partial class Menu : Form
 	{
-		MonitorForm monitoring = new MonitorForm();
+		
 		Form sorter = new Form1();
 		HelpForm help = new HelpForm();
 
@@ -74,20 +74,14 @@ namespace File_Sorter
 
 		private void monitoringToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (monitoring_Already_Opened == false)
-			{
-				monitoring.FormClosed += new FormClosedEventHandler(monitorClosed);
-				monitoring.MdiParent = this;
-				monitoring.Dock = DockStyle.Fill;
-				monitoring.WindowState = FormWindowState.Normal;
-				monitoring_Already_Opened = true;
-				monitoring.Show();
-				menuStrip1.Enabled = false;
-			}
-			else
-			{
-				monitoring.Show();
-			}
+		
+			MonitorForm monitoring = new MonitorForm();
+			monitoring.FormClosed += new FormClosedEventHandler(monitorClosed);
+			monitoring.MdiParent = this;
+			monitoring.Dock = DockStyle.Fill;
+			monitoring.WindowState = FormWindowState.Normal;
+			monitoring.Show();
+			menuStrip1.Enabled = false;
 		}
 
 		void aboutClosed(object sender,FormClosedEventArgs e)
