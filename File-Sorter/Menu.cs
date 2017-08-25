@@ -18,7 +18,6 @@ namespace File_Sorter
 
 		bool about_Form_Already_Opened = false;
 		bool help_Already_Opened = false;
-		bool monitoring_Already_Opened = false;
 
 		public Menu()
 		{
@@ -98,7 +97,6 @@ namespace File_Sorter
 
 		void monitorClosed(object sender, FormClosedEventArgs e)
 		{
-			monitoring_Already_Opened = false;
 			menuStrip1.Enabled = true;
 		}
 	}
