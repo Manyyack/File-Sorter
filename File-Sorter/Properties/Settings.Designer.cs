@@ -46,5 +46,101 @@ namespace File_Sorter.Properties {
                 this["dir1"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool monitoring2 {
+            get {
+                return ((bool)(this["monitoring2"]));
+            }
+            set {
+                this["monitoring2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool monitoring3 {
+            get {
+                return ((bool)(this["monitoring3"]));
+            }
+            set {
+                this["monitoring3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool monitoring4 {
+            get {
+                return ((bool)(this["monitoring4"]));
+            }
+            set {
+                this["monitoring4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool monitoring5 {
+            get {
+                return ((bool)(this["monitoring5"]));
+            }
+            set {
+                this["monitoring5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string dir2 {
+            get {
+                return ((string)(this["dir2"]));
+            }
+            set {
+                this["dir2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string dir3 {
+            get {
+                return ((string)(this["dir3"]));
+            }
+            set {
+                this["dir3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string dir4 {
+            get {
+                return ((string)(this["dir4"]));
+            }
+            set {
+                this["dir4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string dir5 {
+            get {
+                return ((string)(this["dir5"]));
+            }
+            set {
+                this["dir5"] = value;
+            }
+        }
     }
 }
