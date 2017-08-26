@@ -28,7 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.exit_Help = new System.Windows.Forms.Button();
+			this.exit_Settings = new System.Windows.Forms.Button();
 			this.bt_Browse1 = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
 			this.Folder_Path1 = new System.Windows.Forms.RichTextBox();
@@ -52,16 +52,16 @@
 			this.Browser = new System.Windows.Forms.FolderBrowserDialog();
 			this.SuspendLayout();
 			// 
-			// exit_Help
+			// exit_Settings
 			// 
-			this.exit_Help.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.exit_Help.Location = new System.Drawing.Point(280, 331);
-			this.exit_Help.Name = "exit_Help";
-			this.exit_Help.Size = new System.Drawing.Size(75, 23);
-			this.exit_Help.TabIndex = 2;
-			this.exit_Help.Text = "Exit";
-			this.exit_Help.UseVisualStyleBackColor = true;
-			this.exit_Help.Click += new System.EventHandler(this.exit_Monitor_Click);
+			this.exit_Settings.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.exit_Settings.Location = new System.Drawing.Point(280, 331);
+			this.exit_Settings.Name = "exit_Settings";
+			this.exit_Settings.Size = new System.Drawing.Size(75, 23);
+			this.exit_Settings.TabIndex = 2;
+			this.exit_Settings.Text = "Exit";
+			this.exit_Settings.UseVisualStyleBackColor = true;
+			this.exit_Settings.Click += new System.EventHandler(this.exit_Monitor_Click);
 			// 
 			// bt_Browse1
 			// 
@@ -326,7 +326,7 @@
 			this.Controls.Add(this.bt_Browse1);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.Folder_Path1);
-			this.Controls.Add(this.exit_Help);
+			this.Controls.Add(this.exit_Settings);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "MonitorForm";
 			this.Text = "Browse";
@@ -336,7 +336,7 @@
 		}
 
 		#endregion
-		private System.Windows.Forms.Button exit_Help;
+		private System.Windows.Forms.Button exit_Settings;
 		private System.Windows.Forms.Button bt_Browse1;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.RichTextBox Folder_Path1;

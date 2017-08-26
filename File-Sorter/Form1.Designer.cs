@@ -118,7 +118,7 @@
 			this.Button_Box.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
 			this.Button_Box.Location = new System.Drawing.Point(3, 3);
 			this.Button_Box.Name = "Button_Box";
-			this.Button_Box.Size = new System.Drawing.Size(200, 20);
+			this.Button_Box.Size = new System.Drawing.Size(200, 22);
 			this.Button_Box.TabIndex = 0;
 			this.Button_Box.TabStop = false;
 			this.Button_Box.Text = "Organized Folder Information";

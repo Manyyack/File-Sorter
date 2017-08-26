@@ -86,6 +86,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
         "Release"
@@ -110,6 +118,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
     }
@@ -330,7 +346,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:File Sort"
         "ProductCode" = "8:{8D60CF1C-948F-4652-B1F5-92545D00BF4C}"
-        "PackageCode" = "8:{61AAC8C8-68A1-4F00-90BE-E72A139DC117}"
+        "PackageCode" = "8:{1AD80899-B97E-4950-B56F-A423ABFBFC35}"
         "UpgradeCode" = "8:{476C79BE-B5BD-453F-A294-DC6FAD6F508E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -490,6 +506,20 @@
             "Folder" = "8:_FB7DB5456E4E45B69CC51AA11F0C8F0F"
             "WorkingFolder" = "8:_B8CCD601D4974275B7C12A164BEE2362"
             "Icon" = "8:_069E9043E93643D4BC1F300D42F58787"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_F8F606F48EBC4BD7B8B5359503457C6E"
+            {
+            "Name" = "8:Uninstall"
+            "Arguments" = "8:/x {8D60CF1C-948F-4652-B1F5-92545D00BF4C} /qr"
+            "Description" = "8:Uninstalls the Program"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_23D00FB91563492B8212CB95149F8A2C"
+            "Folder" = "8:_B8CCD601D4974275B7C12A164BEE2362"
+            "WorkingFolder" = "8:_516DEFECE1AC42F3A3E0EB18ABE20AC5"
+            "Icon" = "8:"
             "Feature" = "8:"
             }
         }

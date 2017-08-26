@@ -69,6 +69,7 @@ namespace File_Sorter
 
 		private void Connect_Click(object sender, EventArgs e)
 		{
+			Button_Box.Controls.Clear();
 			changeDirectoryAndOrganize(D_Path, true, true);
 		}
 

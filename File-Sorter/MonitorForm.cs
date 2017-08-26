@@ -48,6 +48,8 @@ namespace File_Sorter
 			monitor_TT.SetToolTip(bt_Browse4, "Browse the folder");
 			monitor_TT.SetToolTip(bt_Browse5, "Browse the folder");
 
+			monitor_TT.SetToolTip(exit_Settings, "Save and exit.");
+
 
 			Folder_Path2.Enabled = false;
 			Folder_Path3.Enabled = false;
