@@ -22,11 +22,49 @@ namespace File_Sorter
 		{
 			cb_Monitor1.Checked = Properties.Settings.Default.monitoring1;
 			Folder_Path1.Text = Properties.Settings.Default.dir1;
-			if(cb_Monitor1.Checked == false)
+
+			cb_Monitor2.Checked = Properties.Settings.Default.monitoring2;
+			Folder_Path2.Text = Properties.Settings.Default.dir2;
+
+			cb_Monitor3.Checked = Properties.Settings.Default.monitoring3;
+			Folder_Path3.Text = Properties.Settings.Default.dir3;
+
+			cb_Monitor4.Checked = Properties.Settings.Default.monitoring4;
+			Folder_Path4.Text = Properties.Settings.Default.dir4;
+
+			cb_Monitor5.Checked = Properties.Settings.Default.monitoring5;
+			Folder_Path5.Text = Properties.Settings.Default.dir5;
+
+			if (cb_Monitor1.Checked == false)
 			{
 				Folder_Path1.Enabled = false;
 				bt_Browse1.Enabled = false;
 			}
+
+			if (cb_Monitor2.Checked == false)
+			{
+				Folder_Path2.Enabled = false;
+				bt_Browse2.Enabled = false;
+			}
+
+			if (cb_Monitor3.Checked == false)
+			{
+				Folder_Path3.Enabled = false;
+				bt_Browse3.Enabled = false;
+			}
+
+			if (cb_Monitor4.Checked == false)
+			{
+				Folder_Path4.Enabled = false;
+				bt_Browse4.Enabled = false;
+			}
+
+			if (cb_Monitor5.Checked == false)
+			{
+				Folder_Path5.Enabled = false;
+				bt_Browse5.Enabled = false;
+			}
+
 
 			ToolTip monitor_TT = new ToolTip();
 			monitor_TT.AutoPopDelay = 500;
@@ -49,21 +87,6 @@ namespace File_Sorter
 			monitor_TT.SetToolTip(bt_Browse5, "Browse the folder");
 
 			monitor_TT.SetToolTip(exit_Settings, "Save and exit.");
-
-
-			Folder_Path2.Enabled = false;
-			Folder_Path3.Enabled = false;
-			Folder_Path4.Enabled = false;
-			Folder_Path5.Enabled = false;
-
-			
-			bt_Browse2.Enabled = false;
-			bt_Browse3.Enabled = false;
-			bt_Browse4.Enabled = false;
-			bt_Browse5.Enabled = false;
-
-			//take the previous values using the application settings.
-			//Future implementation.
 		}
 
 		private void cb_Monitor1_CheckedChanged(object sender, EventArgs e)
@@ -91,11 +114,15 @@ namespace File_Sorter
 			{
 				Folder_Path3.Enabled = true;
 				bt_Browse3.Enabled = true;
+				Properties.Settings.Default.monitoring3 = true;
+				Properties.Settings.Default.Save();
 			}
 			else
 			{
 				Folder_Path3.Enabled = false;
 				bt_Browse3.Enabled = false;
+				Properties.Settings.Default.monitoring3 = false;
+				Properties.Settings.Default.Save();
 			}
 		}
 
@@ -105,11 +132,15 @@ namespace File_Sorter
 			{
 				Folder_Path2.Enabled = true;
 				bt_Browse2.Enabled = true;
+				Properties.Settings.Default.monitoring2 = true;
+				Properties.Settings.Default.Save();
 			}
 			else
 			{
 				Folder_Path2.Enabled = false;
 				bt_Browse2.Enabled = false;
+				Properties.Settings.Default.monitoring2 = false;
+				Properties.Settings.Default.Save();
 			}
 		}
 
@@ -119,11 +150,15 @@ namespace File_Sorter
 			{
 				Folder_Path4.Enabled = true;
 				bt_Browse4.Enabled = true;
+				Properties.Settings.Default.monitoring4 = true;
+				Properties.Settings.Default.Save();
 			}
 			else
 			{
 				Folder_Path4.Enabled = false;
 				bt_Browse4.Enabled = false;
+				Properties.Settings.Default.monitoring4 = false;
+				Properties.Settings.Default.Save();
 			}
 		}
 
@@ -133,11 +168,15 @@ namespace File_Sorter
 			{
 				Folder_Path5.Enabled = true;
 				bt_Browse5.Enabled = true;
+				Properties.Settings.Default.monitoring5 = true;
+				Properties.Settings.Default.Save();
 			}
 			else
 			{
 				Folder_Path5.Enabled = false;
 				bt_Browse5.Enabled = false;
+				Properties.Settings.Default.monitoring5 = false;
+				Properties.Settings.Default.Save();
 			}
 		}
 
@@ -145,13 +184,64 @@ namespace File_Sorter
 		{
 			Browser.ShowDialog();
 			Folder_Path1.Text = Browser.SelectedPath;
-			Browser.Dispose();
-			
+			Browser.Dispose();	
 		}
 
 		private void Folder_Path1_TextChanged(object sender, EventArgs e)
 		{
 			Properties.Settings.Default.dir1 = Folder_Path1.Text;
+			Properties.Settings.Default.Save();
+		}
+
+		private void bt_Browse2_Click(object sender, EventArgs e)
+		{
+			Browser.ShowDialog();
+			Folder_Path2.Text = Browser.SelectedPath;
+			Browser.Dispose();
+		}
+
+		private void bt_Browse3_Click(object sender, EventArgs e)
+		{
+			Browser.ShowDialog();
+			Folder_Path3.Text = Browser.SelectedPath;
+			Browser.Dispose();
+		}
+
+		private void bt_Browse4_Click(object sender, EventArgs e)
+		{
+			Browser.ShowDialog();
+			Folder_Path4.Text = Browser.SelectedPath;
+			Browser.Dispose();
+		}
+
+		private void bt_Browse5_Click(object sender, EventArgs e)
+		{
+			Browser.ShowDialog();
+			Folder_Path5.Text = Browser.SelectedPath;
+			Browser.Dispose();
+		}
+
+		private void Folder_Path2_TextChanged(object sender, EventArgs e)
+		{
+			Properties.Settings.Default.dir2 = Folder_Path2.Text;
+			Properties.Settings.Default.Save();
+		}
+
+		private void Folder_Path3_TextChanged(object sender, EventArgs e)
+		{
+			Properties.Settings.Default.dir3 = Folder_Path3.Text;
+			Properties.Settings.Default.Save();
+		}
+
+		private void Folder_Path4_TextChanged(object sender, EventArgs e)
+		{
+			Properties.Settings.Default.dir4 = Folder_Path4.Text;
+			Properties.Settings.Default.Save();
+		}
+
+		private void Folder_Path5_TextChanged(object sender, EventArgs e)
+		{
+			Properties.Settings.Default.dir5 = Folder_Path5.Text;
 			Properties.Settings.Default.Save();
 		}
 	}

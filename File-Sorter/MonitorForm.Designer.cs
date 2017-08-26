@@ -132,6 +132,7 @@
 			this.bt_Browse2.TabIndex = 13;
 			this.bt_Browse2.Text = "Browse";
 			this.bt_Browse2.UseVisualStyleBackColor = false;
+			this.bt_Browse2.Click += new System.EventHandler(this.bt_Browse2_Click);
 			// 
 			// label2
 			// 
@@ -158,6 +159,7 @@
 			this.Folder_Path2.Size = new System.Drawing.Size(425, 21);
 			this.Folder_Path2.TabIndex = 11;
 			this.Folder_Path2.Text = "";
+			this.Folder_Path2.TextChanged += new System.EventHandler(this.Folder_Path2_TextChanged);
 			// 
 			// cb_Monitor3
 			// 
@@ -179,6 +181,7 @@
 			this.bt_Browse3.TabIndex = 18;
 			this.bt_Browse3.Text = "Browse";
 			this.bt_Browse3.UseVisualStyleBackColor = false;
+			this.bt_Browse3.Click += new System.EventHandler(this.bt_Browse3_Click);
 			// 
 			// label3
 			// 
@@ -205,6 +208,7 @@
 			this.Folder_Path3.Size = new System.Drawing.Size(425, 21);
 			this.Folder_Path3.TabIndex = 16;
 			this.Folder_Path3.Text = "";
+			this.Folder_Path3.TextChanged += new System.EventHandler(this.Folder_Path3_TextChanged);
 			// 
 			// cb_Monitor4
 			// 
@@ -226,6 +230,7 @@
 			this.bt_Browse4.TabIndex = 23;
 			this.bt_Browse4.Text = "Browse";
 			this.bt_Browse4.UseVisualStyleBackColor = false;
+			this.bt_Browse4.Click += new System.EventHandler(this.bt_Browse4_Click);
 			// 
 			// label4
 			// 
@@ -252,6 +257,7 @@
 			this.Folder_Path4.Size = new System.Drawing.Size(425, 21);
 			this.Folder_Path4.TabIndex = 21;
 			this.Folder_Path4.Text = "";
+			this.Folder_Path4.TextChanged += new System.EventHandler(this.Folder_Path4_TextChanged);
 			// 
 			// cb_Monitor5
 			// 
@@ -273,6 +279,7 @@
 			this.bt_Browse5.TabIndex = 28;
 			this.bt_Browse5.Text = "Browse";
 			this.bt_Browse5.UseVisualStyleBackColor = false;
+			this.bt_Browse5.Click += new System.EventHandler(this.bt_Browse5_Click);
 			// 
 			// label5
 			// 
@@ -299,6 +306,7 @@
 			this.Folder_Path5.Size = new System.Drawing.Size(425, 21);
 			this.Folder_Path5.TabIndex = 26;
 			this.Folder_Path5.Text = "";
+			this.Folder_Path5.TextChanged += new System.EventHandler(this.Folder_Path5_TextChanged);
 			// 
 			// MonitorForm
 			// 
