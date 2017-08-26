@@ -17,13 +17,17 @@ namespace File_Sorter
 
 		NotifyIcon notifier = new NotifyIcon();
 
-		FileSystemWatcher watcher1 = new FileSystemWatcher();		//5 filesystem watcher for monitoring
-		FileSystemWatcher watcher2 = new FileSystemWatcher();		//5 filesystem watcher for monitoring
-		FileSystemWatcher watcher3 = new FileSystemWatcher();		//5 filesystem watcher for monitoring
-		FileSystemWatcher watcher4 = new FileSystemWatcher();		//5 filesystem watcher for monitoring
-		FileSystemWatcher watcher5 = new FileSystemWatcher();		//5 filesystem watcher for monitoring
+		public FileSystemWatcher watcher1 = new FileSystemWatcher();		//5 filesystem watcher for monitoring
+		public FileSystemWatcher watcher2 = new FileSystemWatcher();		//5 filesystem watcher for monitoring
+		public FileSystemWatcher watcher3 = new FileSystemWatcher();		//5 filesystem watcher for monitoring
+		public FileSystemWatcher watcher4 = new FileSystemWatcher();		//5 filesystem watcher for monitoring
+		public FileSystemWatcher watcher5 = new FileSystemWatcher();		//5 filesystem watcher for monitoring
 
-		System.Timers.Timer delay = new System.Timers.Timer();
+		System.Timers.Timer delay1 = new System.Timers.Timer();
+		System.Timers.Timer delay2 = new System.Timers.Timer();
+		System.Timers.Timer delay3 = new System.Timers.Timer();
+		System.Timers.Timer delay4 = new System.Timers.Timer();
+		System.Timers.Timer delay5 = new System.Timers.Timer();
 
 		public Form1()
 		{
@@ -32,6 +36,23 @@ namespace File_Sorter
 			watcher1.NotifyFilter = NotifyFilters.LastWrite;
 			watcher1.Filter = "*.*";
 			watcher1.Changed += new FileSystemEventHandler(fileChanged1);
+
+			watcher2.NotifyFilter = NotifyFilters.LastWrite;
+			watcher2.Filter = "*.*";
+			watcher2.Changed += new FileSystemEventHandler(fileChanged2);
+
+			watcher3.NotifyFilter = NotifyFilters.LastWrite;
+			watcher3.Filter = "*.*";
+			watcher3.Changed += new FileSystemEventHandler(fileChanged3);
+
+			watcher4.NotifyFilter = NotifyFilters.LastWrite;
+			watcher4.Filter = "*.*";
+			watcher4.Changed += new FileSystemEventHandler(fileChanged4);
+
+			watcher5.NotifyFilter = NotifyFilters.LastWrite;
+			watcher5.Filter = "*.*";
+			watcher5.Changed += new FileSystemEventHandler(fileChanged5);
+
 
 			Properties.Settings.Default.PropertyChanged += Default_PropertyChanged;
 
@@ -52,6 +73,32 @@ namespace File_Sorter
 			tooltip1.SetToolTip(this.Browse, "Browse the folder");
 			tooltip1.SetToolTip(this.Exclude, "Check to exclude File Types");
 			tooltip1.SetToolTip(this.Exclude_List, "Enter the file types to exclude seperated with ';'");
+
+			if(Properties.Settings.Default.monitoring1 == true)
+			{
+				watcher1.Path = Properties.Settings.Default.dir1;
+				watcher1.EnableRaisingEvents = true;
+			}
+			if (Properties.Settings.Default.monitoring2 == true)
+			{
+				watcher2.Path = Properties.Settings.Default.dir2;
+				watcher2.EnableRaisingEvents = true;
+			}
+			if (Properties.Settings.Default.monitoring3 == true)
+			{
+				watcher3.Path = Properties.Settings.Default.dir3;
+				watcher3.EnableRaisingEvents = true;
+			}
+			if (Properties.Settings.Default.monitoring4 == true)
+			{
+				watcher4.Path = Properties.Settings.Default.dir4;
+				watcher4.EnableRaisingEvents = true;
+			}
+			if (Properties.Settings.Default.monitoring5 == true)
+			{
+				watcher5.Path = Properties.Settings.Default.dir5;
+				watcher5.EnableRaisingEvents = true;
+			}
 		}
 
 		private void Browse_Click(object sender, EventArgs e)
@@ -343,6 +390,82 @@ namespace File_Sorter
 			{
 				watcher1.EnableRaisingEvents = false;
 			}
+
+			if (Properties.Settings.Default.monitoring2 == true && Properties.Settings.Default.dir2 != "")
+			{
+				watcher2.Path = Properties.Settings.Default.dir2;
+
+				if (checkForDirectory(watcher2.Path) == true)
+				{
+					watcher2.EnableRaisingEvents = true;
+				}
+				else
+				{
+					watcher2.EnableRaisingEvents = false;
+					return;
+				}
+			}
+			else
+			{
+				watcher2.EnableRaisingEvents = false;
+			}
+
+			if (Properties.Settings.Default.monitoring3 == true && Properties.Settings.Default.dir3 != "")
+			{
+				watcher3.Path = Properties.Settings.Default.dir3;
+
+				if (checkForDirectory(watcher3.Path) == true)
+				{
+					watcher3.EnableRaisingEvents = true;
+				}
+				else
+				{
+					watcher3.EnableRaisingEvents = false;
+					return;
+				}
+			}
+			else
+			{
+				watcher3.EnableRaisingEvents = false;
+			}
+
+			if (Properties.Settings.Default.monitoring4 == true && Properties.Settings.Default.dir4 != "")
+			{
+				watcher4.Path = Properties.Settings.Default.dir4;
+
+				if (checkForDirectory(watcher4.Path) == true)
+				{
+					watcher4.EnableRaisingEvents = true;
+				}
+				else
+				{
+					watcher4.EnableRaisingEvents = false;
+					return;
+				}
+			}
+			else
+			{
+				watcher4.EnableRaisingEvents = false;
+			}
+
+			if (Properties.Settings.Default.monitoring5 == true && Properties.Settings.Default.dir5 != "")
+			{
+				watcher5.Path = Properties.Settings.Default.dir5;
+
+				if (checkForDirectory(watcher5.Path) == true)
+				{
+					watcher5.EnableRaisingEvents = true;
+				}
+				else
+				{
+					watcher5.EnableRaisingEvents = false;
+					return;
+				}
+			}
+			else
+			{
+				watcher5.EnableRaisingEvents = false;
+			}
 		}
 
 		void fileChanged1(object sender, FileSystemEventArgs e)
@@ -356,17 +479,104 @@ namespace File_Sorter
 				return;
 			}
 
-			delay.Interval = 2000;
-			delay.Elapsed += Delay_Tick;
-			delay.Enabled = true;
-			
+			delay1.Interval = 2000;
+			delay1.Elapsed += Delay_Tick1;
+			delay1.Enabled = true;	
 		}
 
-		private void Delay_Tick(object sender, EventArgs e)
+		void fileChanged2(object sender, FileSystemEventArgs e)
 		{
-			delay.Enabled = false;
-			changeDirectoryAndOrganize(Properties.Settings.Default.dir1, false, false);
+			checkForDirectory(watcher2.Path);
 
+			string[] files_present = Directory.GetFiles(Directory.GetCurrentDirectory());
+
+			if (files_present.Length == 0)
+			{
+				return;
+			}
+
+			delay2.Interval = 2000;
+			delay2.Elapsed += Delay_Tick2;
+			delay2.Enabled = true;
+		}
+
+		void fileChanged3(object sender, FileSystemEventArgs e)
+		{
+			checkForDirectory(watcher3.Path);
+
+			string[] files_present = Directory.GetFiles(Directory.GetCurrentDirectory());
+
+			if (files_present.Length == 0)
+			{
+				return;
+			}
+
+			delay3.Interval = 2000;
+			delay3.Elapsed += Delay_Tick3;
+			delay3.Enabled = true;
+		}
+
+		void fileChanged4(object sender, FileSystemEventArgs e)
+		{
+			checkForDirectory(watcher4.Path);
+
+			string[] files_present = Directory.GetFiles(Directory.GetCurrentDirectory());
+
+			if (files_present.Length == 0)
+			{
+				return;
+			}
+
+			delay4.Interval = 2000;
+			delay4.Elapsed += Delay_Tick4;
+			delay4.Enabled = true;
+		}
+
+		void fileChanged5(object sender, FileSystemEventArgs e)
+		{
+			checkForDirectory(watcher5.Path);
+
+			string[] files_present = Directory.GetFiles(Directory.GetCurrentDirectory());
+
+			if (files_present.Length == 0)
+			{
+				return;
+			}
+
+			delay5.Interval = 2000;
+			delay5.Elapsed += Delay_Tick5;
+			delay5.Enabled = true;
+		}
+
+
+		private void Delay_Tick1(object sender, EventArgs e)
+		{
+			delay1.Enabled = false;
+			changeDirectoryAndOrganize(Properties.Settings.Default.dir1, false, false);
+		}
+
+		private void Delay_Tick2(object sender, EventArgs e)
+		{
+			delay2.Enabled = false;
+			changeDirectoryAndOrganize(Properties.Settings.Default.dir2, false, false);
+		}
+
+		private void Delay_Tick3(object sender, EventArgs e)
+		{
+			delay3.Enabled = false;
+			changeDirectoryAndOrganize(Properties.Settings.Default.dir3, false, false);
+		}
+
+		private void Delay_Tick4(object sender, EventArgs e)
+		{
+			delay4.Enabled = false;
+			changeDirectoryAndOrganize(Properties.Settings.Default.dir4, false, false);
+		}
+
+		private void Delay_Tick5(object sender, EventArgs e)
+		{
+			delay5.Enabled = false;
+			changeDirectoryAndOrganize(Properties.Settings.Default.dir5, false, false);
 		}
 
 		bool checkForDirectory(string dir_path_temp)
