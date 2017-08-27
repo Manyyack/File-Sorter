@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{D9461C46-77D7-4789-86AA-75FFB4F108C7}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>File_Sorter</RootNamespace>
     <AssemblyName>File-Sorter</AssemblyName>
@@ -77,7 +77,7 @@
     <TargetZone>Internet</TargetZone>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
+    <StartupObject>File_Sorter.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup />
