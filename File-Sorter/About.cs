@@ -17,5 +17,10 @@ namespace File_Sorter
 			InitializeComponent();
 			Version.Text += Application.ProductVersion;
 		}
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			Close();
+		}
 	}
 }
