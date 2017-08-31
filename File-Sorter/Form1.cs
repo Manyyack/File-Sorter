@@ -76,28 +76,43 @@ namespace File_Sorter
 
 			if(Properties.Settings.Default.monitoring1 == true)
 			{
-				watcher1.Path = Properties.Settings.Default.dir1;
-				watcher1.EnableRaisingEvents = true;
+				if (Directory.Exists(Properties.Settings.Default.dir1))
+				{
+					watcher1.Path = Properties.Settings.Default.dir1;
+					watcher1.EnableRaisingEvents = true;
+				}
 			}
 			if (Properties.Settings.Default.monitoring2 == true)
 			{
-				watcher2.Path = Properties.Settings.Default.dir2;
-				watcher2.EnableRaisingEvents = true;
+				if (Directory.Exists(Properties.Settings.Default.dir2))
+				{
+					watcher2.Path = Properties.Settings.Default.dir2;
+					watcher2.EnableRaisingEvents = true;
+				}
 			}
 			if (Properties.Settings.Default.monitoring3 == true)
 			{
-				watcher3.Path = Properties.Settings.Default.dir3;
-				watcher3.EnableRaisingEvents = true;
+				if (Directory.Exists(Properties.Settings.Default.dir3))
+				{
+					watcher3.Path = Properties.Settings.Default.dir3;
+					watcher3.EnableRaisingEvents = true;
+				}
 			}
 			if (Properties.Settings.Default.monitoring4 == true)
 			{
-				watcher4.Path = Properties.Settings.Default.dir4;
-				watcher4.EnableRaisingEvents = true;
+				if (Directory.Exists(Properties.Settings.Default.dir4))
+				{
+					watcher4.Path = Properties.Settings.Default.dir4;
+					watcher4.EnableRaisingEvents = true;
+				}
 			}
 			if (Properties.Settings.Default.monitoring5 == true)
 			{
-				watcher5.Path = Properties.Settings.Default.dir5;
-				watcher5.EnableRaisingEvents = true;
+				if (Directory.Exists(Properties.Settings.Default.dir5))
+				{
+					watcher5.Path = Properties.Settings.Default.dir5;
+					watcher5.EnableRaisingEvents = true;
+				}
 			}
 		}
 
@@ -372,7 +387,7 @@ namespace File_Sorter
 
 		private void Default_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
-			if (Properties.Settings.Default.monitoring1 == true && Properties.Settings.Default.dir1 != "")
+			if (Properties.Settings.Default.monitoring1 == true && Properties.Settings.Default.dir1 != "" && Directory.Exists(Properties.Settings.Default.dir1))
 			{
 				watcher1.Path = Properties.Settings.Default.dir1;
 
@@ -391,7 +406,7 @@ namespace File_Sorter
 				watcher1.EnableRaisingEvents = false;
 			}
 
-			if (Properties.Settings.Default.monitoring2 == true && Properties.Settings.Default.dir2 != "")
+			if (Properties.Settings.Default.monitoring2 == true && Properties.Settings.Default.dir2 != "" && Directory.Exists(Properties.Settings.Default.dir2))
 			{
 				watcher2.Path = Properties.Settings.Default.dir2;
 
@@ -410,7 +425,7 @@ namespace File_Sorter
 				watcher2.EnableRaisingEvents = false;
 			}
 
-			if (Properties.Settings.Default.monitoring3 == true && Properties.Settings.Default.dir3 != "")
+			if (Properties.Settings.Default.monitoring3 == true && Properties.Settings.Default.dir3 != "" && Directory.Exists(Properties.Settings.Default.dir3))
 			{
 				watcher3.Path = Properties.Settings.Default.dir3;
 
@@ -429,7 +444,7 @@ namespace File_Sorter
 				watcher3.EnableRaisingEvents = false;
 			}
 
-			if (Properties.Settings.Default.monitoring4 == true && Properties.Settings.Default.dir4 != "")
+			if (Properties.Settings.Default.monitoring4 == true && Properties.Settings.Default.dir4 != "" && Directory.Exists(Properties.Settings.Default.dir4))
 			{
 				watcher4.Path = Properties.Settings.Default.dir4;
 
@@ -448,7 +463,7 @@ namespace File_Sorter
 				watcher4.EnableRaisingEvents = false;
 			}
 
-			if (Properties.Settings.Default.monitoring5 == true && Properties.Settings.Default.dir5 != "")
+			if (Properties.Settings.Default.monitoring5 == true && Properties.Settings.Default.dir5 != "" && Directory.Exists(Properties.Settings.Default.dir5))
 			{
 				watcher5.Path = Properties.Settings.Default.dir5;
 

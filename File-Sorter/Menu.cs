@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+
+
 namespace File_Sorter
 {
 	public partial class Menu : Form
@@ -18,6 +21,8 @@ namespace File_Sorter
 
 		bool about_Form_Already_Opened = false;
 		bool help_Already_Opened = false;
+
+		
 
 		public Menu()
 		{
